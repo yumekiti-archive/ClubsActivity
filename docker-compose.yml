@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  web:
+    image: node:18.15.0-alpine
+    container_name: clubActivity-web
+    working_dir: /app
+    volumes:
+      - ./web:/app
+    ports:
+      - 3000:3000
+    command: >
+      sh -c "
+        yarn &&
+        yarn dev
+      "
+
+  api:
+    image: node:18.15.0-alpine
+    container_name: clubActivity-api
+    working_dir: /app
+    volumes:
+      - ./api:/app
+    ports:
+      - 1337:1337
+    command: >
+      sh -c "
+        yarn &&
+        yarn develop
+      "
