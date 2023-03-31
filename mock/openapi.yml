@@ -1,12 +1,25 @@
 openapi: "3.0.0"
 info:
-  title: "User API"
+  title: "API"
   version: "1.0.0"
+
+servers:
+  - url: "http://localhost:3003"
+    description: "Mock server"
+  - url: "http://localhost:1337"
+    description: "Local server"
+
 paths:
   /users/{user_id}:
     get:
       $ref: "./paths/get-user.yml"
     # post:
     #   $ref: "./paths/user/post-user.yml"
+  /clubs:
+    get:
+      $ref: "./paths/get-clubs.yml"
+  /clubs/{club_id}:
+    get:
+      $ref: "./paths/get-club.yml"
 components:
   $ref: "./components.yml"

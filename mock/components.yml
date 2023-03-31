@@ -6,6 +6,13 @@ parameters:
     required: true
     schema:
       type: integer
+  club_id:
+    name: club_id
+    in: path
+    description: 取得するクラブのID
+    required: true
+    schema:
+      type: integer
 schemas:
   User:
     type: object
@@ -13,27 +20,48 @@ schemas:
       user_id:
         type: integer
         description: ユーザーID
+      user_uid:
+        type: string
+        description: ユーザーUID
       user_name:
         type: string
         description: ユーザー名
-      email_address:
+      password:
         type: string
-        format: email
-        description: メールアドレス
+        description: パスワード
       user_icon:
         type: string
-        format: byte
-        description: ユーザーアイコンのBase64エンコードされた文字列
-      affiliated_club:
+        description: ユーザーアイコンのURL
+      readme:
+        type: string
+        description: 自己紹介文
+      activity_count:
+        type: integer
+        description: アクティビティ数
+      affiliated_club_id:
         type: array
         items:
-          type: string
-        description: 所属している部活動の配列。所属していない場合は空の配列。
+          type: integer
+        description: 所属するクラブのID
+      created_at:
+        type: string
+        format: date-time
+        description: 作成日時
+      updated_at:
+        type: string
+        format: date-time
+        description: 更新日時
     example:
-      user_id: 1
-      user_name: Taro
-      email_address: taro@example.com
-      affiliated_club: ["baseball"]
+      user_id: 123
+      user_uid: "abcde12345"
+      user_name: "山田太郎"
+      password: "password123"
+      user_icon: "https://example.com/user_icon.png"
+      readme: "こんにちは、山田太郎です。よろしくお願いします。"
+      activity_count: 5
+      affiliated_club_id: [1, 2]
+      created_at: "2022-03-15T10:30:00Z"
+      updated_at: "2022-04-01T14:45:00Z"
   UserInput:
     type: object
     required:
@@ -49,6 +77,47 @@ schemas:
       email_address:
         type: string
         format: email
+  Club:
+    type: object
+    properties:
+      club_id:
+        type: integer
+        description: 部活動ID
+      club_name:
+        type: string
+        description: 部活動名
+      club_description:
+        type: string
+        nullable: true
+        description: 部活動の説明
+      club_category:
+        type: string
+        nullable: true
+        description: 部活動のカテゴリ
+      club_logo_image:
+        type: string
+        nullable: true
+        description: 部活動のロゴ画像ファイル
+      created_at:
+        type: string
+        format: date-time
+        description: 作成日時
+      updated_at:
+        type: string
+        format: date-time
+        description: 更新日時
+    example:
+      club_id: 1
+      club_name: "サッカー部"
+      club_description: "サッカー部です。"
+      club_category: "スポーツ"
+      club_logo_image: "https://example.com/club_logo_image.png"
+      created_at: "2022-03-15T10:30:00Z"
+      updated_at: "2022-04-01T14:45:00Z"
+  Clubs:
+    type: array
+    items:
+      $ref: "#/schemas/Club"
 responses:
   BadRequest:
     description: リクエストが不正です。

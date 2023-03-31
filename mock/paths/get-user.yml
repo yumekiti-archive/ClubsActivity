@@ -1,5 +1,13 @@
 summary: ユーザー情報を取得する
-operationId: getUser
+description: |
+  指定したユーザーIDに対応するユーザー情報を取得するAPIです。
+
+  ### パスパラメーター
+  - user_id: ユーザーID
+
+  ### レスポンス
+  - 200: 成功時はユーザー情報を返します。
+  - 404: 指定したユーザーIDに対応するユーザーが存在しない場合に返されます。
 parameters:
   - $ref: "../components.yml#/parameters/user_id"
 responses:
