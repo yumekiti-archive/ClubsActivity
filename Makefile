@@ -25,4 +25,8 @@ web:
 api:
 	$(dc) exec api /bin/sh
 
-.PHONY:	up down restart reup rm logs web api
+mock:
+	$(dc) rm -fsv swagger-ui swagger-api
+	$(dc) up -d swagger-editor swagger-ui swagger-api
+
+.PHONY:	up down restart reup rm logs web api mock
