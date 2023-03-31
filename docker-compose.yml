@@ -50,6 +50,6 @@ services:
     container_name: "swagger-api"
     ports:
       - "3003:4010"
-    command: mock -h 0.0.0.0 /mock/openapi.yaml
+    command: mock -h 0.0.0.0 /mock/openapi.yml
     volumes:
       - ./mock:/mock
