@@ -109,14 +109,14 @@ erDiagram
 
 ## User Data（ユーザーデータ）
 
-| カラム名        | 説明                              | 型      | Unique | Nullable |
-| --------------- | --------------------------------- | ------- | ------ | -------- |
-| user_id         | ユーザー ID                       | Integer | Yes    | No       |
-| user_name       | ユーザー名                        | String  | Yes    | No       |
-| password        | パスワード                        | String  | No     | No       |
-| email_address   | メールアドレス                    | String  | Yes    | No       |
-| user_icon       | ユーザーアイコン                  | Binary  | No     | Yes      |
-| affiliated_club | 所属している部活動 (ある場合のみ) | Array   | No     | Yes      |
+| カラム名           | 説明                       | 型        | Unique | Nullable |
+| ------------------ | -------------------------- | --------- | ------ | -------- |
+| user_id            | ユーザー ID                | Integer   | Yes    | No       |
+| user_name          | ユーザー名                 | String    | Yes    | No       |
+| password           | パスワード                 | String    | No     | No       |
+| email_address      | メールアドレス             | String    | Yes    | No       |
+| user_icon          | ユーザーアイコン           | Binary    | No     | Yes      |
+| affiliated_club_id | 所属している部活動（複数） | Integer[] | No     | Yes      |
 
 ## Club Data（部活動データ）
 
