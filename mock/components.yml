@@ -1,0 +1,56 @@
+parameters:
+  user_id:
+    name: user_id
+    in: path
+    description: 取得するユーザーのID
+    required: true
+    schema:
+      type: integer
+schemas:
+  User:
+    type: object
+    properties:
+      user_id:
+        type: integer
+        description: ユーザーID
+      user_name:
+        type: string
+        description: ユーザー名
+      email_address:
+        type: string
+        format: email
+        description: メールアドレス
+      user_icon:
+        type: string
+        format: byte
+        description: ユーザーアイコンのBase64エンコードされた文字列
+      affiliated_club:
+        type: array
+        items:
+          type: string
+        description: 所属している部活動の配列。所属していない場合は空の配列。
+    example:
+      user_id: 1
+      user_name: Taro
+      email_address: taro@example.com
+      affiliated_club: ["baseball"]
+  UserInput:
+    type: object
+    required:
+      - user_name
+      - email_address
+    properties:
+      user_name:
+        type: string
+        description: ユーザー名
+      password:
+        type: string
+        description: パスワード
+      email_address:
+        type: string
+        format: email
+responses:
+  BadRequest:
+    description: リクエストが不正です。
+  ServerError:
+    description: サーバーでエラーが発生しました。

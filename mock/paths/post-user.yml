@@ -1,0 +1,15 @@
+summary: ユーザー情報を登録する
+operationId: postUser
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "../components.yml#/schemas/UserInput"
+responses:
+  '201':
+    $ref: "../components.yml#/responses/Created"
+  '400':
+    $ref: "../components.yml#/responses/BadRequest"
+  '500':
+    $ref: "../components.yml#/responses/ServerError"

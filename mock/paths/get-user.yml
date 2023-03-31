@@ -1,0 +1,15 @@
+summary: ユーザー情報を取得する
+operationId: getUser
+parameters:
+  - $ref: "../components.yml#/parameters/user_id"
+responses:
+  '200':
+    description: ユーザー情報の取得に成功しました。
+    content:
+      application/json:
+        schema:
+          $ref: "../components.yml#/schemas/User"
+  '400':
+    $ref: "../components.yml#/responses/BadRequest"
+  '500':
+    $ref: "../components.yml#/responses/ServerError"
