@@ -160,6 +160,7 @@ erDiagram
 | club_id          | 部活動 ID                | Integer  | Yes    | No       |
 | club_name        | 部活動名                 | String   | Yes    | No       |
 | club_description | 部活動の説明             | String   | No     | Yes      |
+| club_category    | 部活動のカテゴリ         | String   | No     | Yes      |
 | club_logo_image  | 部活動のロゴ画像ファイル | String   | No     | Yes      |
 | created_at       | 作成日時                 | DateTime | No     | No       |
 | updated_at       | 更新日時                 | DateTime | No     | No       |
