@@ -116,7 +116,7 @@ erDiagram
 | password        | パスワード                        | String  | No     | No       |
 | email_address   | メールアドレス                    | String  | Yes    | No       |
 | user_icon       | ユーザーアイコン                  | Binary  | No     | Yes      |
-| affiliated_club | 所属している部活動 (ある場合のみ) | String  | No     | Yes      |
+| affiliated_club | 所属している部活動 (ある場合のみ) | Array   | No     | Yes      |
 
 ## Club Data（部活動データ）
 
