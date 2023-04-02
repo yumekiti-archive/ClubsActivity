@@ -29,7 +29,7 @@ section 要件定義
 
 section 開発
 設計 :active, des3, 2023-03-28, 1d
-実装 : des4, after des3, 5d
+実装 : des4, after des3, 11d
 プレリリース : des5, after des4, 3d
 単体テスト : des6, after des5, 1d
 結合テスト : des7, after des6, 1d
@@ -119,20 +119,65 @@ section 保守・運用
 
 ```mermaid
 erDiagram
-    User ||--o{ Comment : "投稿やコメントをする"
-    User ||--o{ Activity : "複数の活動に参加"
-    User ||--|{ AffiliatedClub : "複数の部活に所属"
-    Comment ||--|{ User : "コメントをする"
-    Comment ||--|{ Post : "コメントされる"
-    Activity ||--o{ Post : "活動に関する投稿をする"
-    Activity ||--o{ AffiliatedClub : "所属する部活動で活動する"
-    Post ||--|{ User : "投稿者はユーザーである"
-    Post ||--o{ Comment : "コメントが付けられる"
-    Post ||--|{ Activity : "投稿は活動に関連する"
-    Post ||--|{ AffiliatedClub : "投稿は部活に関連する"
-    AffiliatedClub ||--o{ Activity : "部活に関連する活動がある"
-    AffiliatedClub ||--|{ User : "ユーザーが所属する部活"
-    AffiliatedClub ||--|{ Post : "部活に関連する投稿"
+    User ||--o{ Activity : "参加する"
+    User ||--o{ Post : "投稿する"
+    User ||--o{ Comment : "コメントする"
+    Club ||--o{ User : "所属する"
+    Activity ||--o{ Post : "投稿される"
+    Activity ||--|{ User : "参加する"
+    Post ||--|{ Comment : "コメントされる"
+    User {
+        integer user_id
+        string user_uid
+        string user_name
+        string password
+        string user_icon
+        string readme
+        integer activity_count
+        integer[] affiliated_club_id
+        integer[] activity_id
+        datetime created_at
+        datetime updated_at
+    }
+    Club {
+        integer club_id
+        string club_name
+        string club_description
+        string club_category
+        string club_logo_image
+        datetime created_at
+        datetime updated_at
+    }
+    Activity {
+        integer activity_id
+        string activity_place
+        text activity_detail
+        integer[] activity_user_id
+        integer activity_club_id
+        datetime created_at
+        datetime updated_at
+    }
+    Post {
+        integer post_id
+        string title
+        text content
+        string poster_user_name
+        string posted_image
+        integer view_count
+        integer poster_user_id
+        integer posted_activity_id
+        datetime created_at
+        datetime updated_at
+    }
+    Comment {
+        integer comment_id
+        text comment_body
+        string commenter_user_name
+        integer commenter_user_id
+        integer commented_post_id
+        datetime created_at
+        datetime updated_at
+    }
 
 ```
 
@@ -150,6 +195,7 @@ erDiagram
 | readme             | 自己紹介                   | String    | No     | Yes      |
 | activity_count     | 活動回数                   | Integer   | No     | No       |
 | affiliated_club_id | 所属している部活動（複数） | Integer[] | No     | Yes      |
+| activity_id        | 参加している活動（複数）   | Integer[] | No     | Yes      |
 | created_at         | 作成日時                   | DateTime  | No     | No       |
 | updated_at         | 更新日時                   | DateTime  | No     | No       |
 
@@ -170,10 +216,9 @@ erDiagram
 | カラム名         | 説明                    | 型        | Unique | Nullable |
 | ---------------- | ----------------------- | --------- | ------ | -------- |
 | activity_id      | 活動 ID                 | Integer   | Yes    | No       |
-| activity_date    | 活動日                  | Date      | No     | No       |
 | activity_place   | 活動場所                | String    | No     | No       |
 | activity_detail  | 活動詳細                | Text      | No     | Yes      |
-| activity_people  | 活動参加者              | Integer[] | No     | Yes      |
+| activity_user_id | 活動に参加したユーザー  | Integer[] | No     | Yes      |
 | activity_club_id | 活動が行われた部活動 ID | Integer   | No     | No       |
 | created_at       | 作成日時                | DateTime  | No     | No       |
 | updated_at       | 更新日時                | DateTime  | No     | No       |
@@ -185,10 +230,10 @@ erDiagram
 | post_id            | 投稿 ID                | Integer  | Yes    | No       |
 | title              | タイトル               | String   | No     | No       |
 | content            | 投稿内容               | Text     | No     | No       |
-| poster_user_id     | 投稿者のユーザー ID    | Integer  | No     | No       |
 | poster_user_name   | 投稿者のユーザー名     | String   | No     | No       |
 | posted_image       | 投稿された画像ファイル | String   | No     | Yes      |
 | view_count         | 閲覧数                 | Integer  | No     | No       |
+| poster_user_id     | 投稿者のユーザー ID    | Integer  | No     | No       |
 | posted_activity_id | 投稿された活動 ID      | Integer  | No     | No       |
 | created_at         | 作成日時               | DateTime | No     | No       |
 | updated_at         | 更新日時               | DateTime | No     | No       |
@@ -199,8 +244,8 @@ erDiagram
 | ------------------- | -------------------------- | -------- | ------ | -------- | ------- |
 | comment_id          | コメント ID                | integer  | Yes    | No       | No      |
 | comment_body        | コメント本文               | text     | No     | No       | No      |
-| commenter_user_id   | コメントしたユーザーの ID  | integer  | No     | Yes      | No      |
 | commenter_user_name | コメントしたユーザーの名前 | string   | No     | No       | ゲスト  |
+| commenter_user_id   | コメントしたユーザーの ID  | integer  | No     | Yes      | No      |
 | commented_post_id   | コメントされた投稿の ID    | integer  | No     | No       | No      |
 | created_at          | 作成日時                   | DateTime | No     | No       | No      |
 | updated_at          | 更新日時                   | DateTime | No     | No       | No      |
