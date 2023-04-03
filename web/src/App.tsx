@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { VFC } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import Home from './components/pages/Home';
 
-function App() {
+const App: VFC = () => {
+  const location = useLocation();
+
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <AnimatePresence mode='wait'>
+      <Routes location={location} key={location.pathname}>
+        <Route path='/' element={<Home />} />
+      </Routes>
+    </AnimatePresence>
   );
-}
+};
 
 export default App;
