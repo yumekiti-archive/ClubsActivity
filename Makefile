@@ -1,4 +1,5 @@
 dc := docker compose -f ./docker-compose.yml
+ds := docker compose -f ./docker-compose.swagger.yml
 
 up:
 	$(dc) up -d
@@ -26,7 +27,7 @@ api:
 	$(dc) exec api /bin/sh
 
 mock:
-	$(dc) rm -fsv swagger-ui swagger-api
-	$(dc) up -d swagger-editor swagger-ui swagger-api
+	$(ds) down
+	$(ds) up -d
 
 .PHONY:	up down restart reup rm logs web api mock
