@@ -26,6 +26,9 @@ web:
 api:
 	$(dc) exec api /bin/sh
 
+format:
+	$(dc) exec web yarn format
+
 mock:
 	$(ds) down
 	$(ds) up -d

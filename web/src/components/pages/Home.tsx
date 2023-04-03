@@ -1,4 +1,4 @@
-import React, { VFC } from "react";
+import React, { VFC } from 'react';
 import Layout from 'components/template/Layout';
 import Title from 'components/template/Title';
 
@@ -10,7 +10,7 @@ const Home: VFC = () => {
         hoge
       </div>
     </Layout>
-  )
+  );
 };
 
 export default Home;
