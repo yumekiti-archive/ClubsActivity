@@ -1,8 +1,19 @@
-import { VFC } from 'react'
+import { FC } from 'react'
+import { useQueryClient } from 'react-query';
+import useGetMe from 'hooks/useGetMe';
+import LoadingSpiner from 'components/atoms/LoadingSpiner';
 
-const ProfileCard: VFC = () => {
+const ProfileCard: FC = () => {
+  const queryClient = useQueryClient();
+  const cacheData = queryClient.getQueryData('me');
+  const { data, isLoading } = useGetMe();
+  const newData = data || cacheData;
+
+  if (newData) console.log(newData)
+
   return (
     <div className='w-full shadow p-5 rounded-lg bg-white mb-2 flex items-center justify-center'>
+      {isLoading && <LoadingSpiner />}
       <div className='w-full h-full grid grid-cols-3'>
         <div className='col-span-1 flex items-center justify-center flex-col'>
           <img
@@ -12,10 +23,10 @@ const ProfileCard: VFC = () => {
           />
           <div>
             <h2 className='text-2xl font-bold text-gray-700'>
-              John Doe
+              {newData?.user_name}
             </h2>
             <p className='text-gray-500'>
-              IE2A
+              {newData?.user_class}
             </p>
           </div>
         </div>
@@ -29,9 +40,11 @@ const ProfileCard: VFC = () => {
             <h2 className='text-2xl font-bold text-gray-500'>
               所属
             </h2>
-            <p className='text-xl text-gray-700'>
-              ネットワーク研究会
-            </p>
+            {
+              newData?.affiliated_club_id.map(
+                (club: any, index: number) => <p key={index} className='text-xl text-gray-700'>{club}</p>
+              )
+            }
           </div>
         </div>
       </div>
