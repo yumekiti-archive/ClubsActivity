@@ -1,8 +1,5 @@
 import {
-  faTable,
-  faChartLine,
-  faBell,
-  faCalendarAlt,
+  faCode,
   faHome,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,24 +10,9 @@ const tabList = [
     icon: faHome,
   },
   {
-    path: '/timetable',
-    pageName: '時間割',
-    icon: faTable,
-  },
-  {
-    path: '/attendance',
-    pageName: '出席率',
-    icon: faChartLine,
-  },
-  {
-    path: '/news',
-    pageName: 'お知らせ',
-    icon: faBell,
-  },
-  {
-    path: '/calendar',
-    pageName: 'カレンダー',
-    icon: faCalendarAlt,
+    path: '/clubs/1',
+    pageName: 'プログラミング研究部',
+    icon: faCode,
   },
 ] as const;
 
