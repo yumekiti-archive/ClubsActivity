@@ -370,25 +370,27 @@ erDiagram
 
 ## ユーザー関連
 
-| HTTP メソッド | エンドポイント  | 説明             | 優先度 |
-| ------------- | --------------- | ---------------- | ------ |
-| GET           | /users          | ユーザー一覧     | 低     |
-| POST          | /users          | ユーザー登録     | 高     |
-| GET           | /users/:user_id | ユーザー詳細     | 中     |
-| PUT           | /users/:user_id | ユーザー情報更新 | 低     |
-| DELETE        | /users/:user_id | ユーザー削除     | 低     |
-| GET           | /me             | ログインユーザー | 高     |
-| POST          | /login          | ログイン         | 高     |
+| HTTP メソッド | エンドポイント  | 説明                     | 優先度 |
+| ------------- | --------------- | ------------------------ | ------ |
+| GET           | /users          | ユーザー一覧             | 低     |
+| POST          | /users          | ユーザー登録             | 高     |
+| GET           | /users/:user_id | ユーザー詳細             | 中     |
+| PUT           | /users/:user_id | ユーザー情報更新         | 低     |
+| DELETE        | /users/:user_id | ユーザー削除             | 低     |
+| GET           | /me             | ログインユーザー         | 高     |
+| GET           | /me/clubs       | ログインユーザーの部活動 | 高     |
+| POST          | /login          | ログイン                 | 高     |
 
 ## 部活動データ関連
 
-| HTTP メソッド | エンドポイント  | 説明           | 優先度 |
-| ------------- | --------------- | -------------- | ------ |
-| GET           | /clubs          | 部活動一覧     | 高     |
-| POST          | /clubs          | 部活動登録     | 高     |
-| GET           | /clubs/:club_id | 部活動詳細     | 中     |
-| PUT           | /clubs/:club_id | 部活動情報更新 | 低     |
-| DELETE        | /clubs/:club_id | 部活動削除     | 低     |
+| HTTP メソッド | エンドポイント         | 説明               | 優先度 |
+| ------------- | ---------------------- | ------------------ | ------ |
+| GET           | /clubs                 | 部活動一覧         | 高     |
+| POST          | /clubs                 | 部活動登録         | 高     |
+| GET           | /clubs/:club_id        | 部活動詳細         | 中     |
+| PUT           | /clubs/:club_id        | 部活動情報更新     | 低     |
+| DELETE        | /clubs/:club_id        | 部活動削除         | 低     |
+| GET           | /clubs/:club_id/member | 部活動メンバー一覧 | 高     |
 
 ## 活動データ関連
 
@@ -400,6 +402,7 @@ erDiagram
 | GET           | /activities/:activity_id        | 活動詳細     | 低     |
 | PUT           | /activities/:activity_id        | 活動情報更新 | 低     |
 | DELETE        | /activities/:activity_id        | 活動削除     | 低     |
+| GET           | /clubs/:club_id/activities      | 活動一覧     | 中     |
 
 ## イベントデータ関連
 
