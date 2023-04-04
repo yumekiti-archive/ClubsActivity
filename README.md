@@ -242,18 +242,18 @@ erDiagram
 
 ## Event Data（イベントデータ）
 
-| カラム名        | 説明                    | 型       | Unique | Nullable |
-| --------------- | ----------------------- | -------- | ------ | -------- |
-| event_id        | イベント ID             | Integer  | Yes    | No       |
-| event_name      | イベント名              | String   | No     | No       |
-| event_detail    | イベント詳細            | Text     | No     | Yes      |
-| event_place     | イベント場所            | String   | No     | No       |
-| event_start_at  | イベント開始日時        | DateTime | No     | No       |
-| event_end_at    | イベント終了日時        | DateTime | No     | No       |
-| event_image     | イベントの画像ファイル  | String   | No     | Yes      |
-| event_club_id   | イベントが行われた部活 | Integer  | No     | No       |
-| created_at      | 作成日時                | DateTime | No     | No       |
-| updated_at      | 更新日時                | DateTime | No     | No       |
+| カラム名       | 説明                   | 型       | Unique | Nullable |
+| -------------- | ---------------------- | -------- | ------ | -------- |
+| event_id       | イベント ID            | Integer  | Yes    | No       |
+| event_name     | イベント名             | String   | No     | No       |
+| event_detail   | イベント詳細           | Text     | No     | Yes      |
+| event_place    | イベント場所           | String   | No     | No       |
+| event_start_at | イベント開始日時       | DateTime | No     | No       |
+| event_end_at   | イベント終了日時       | DateTime | No     | No       |
+| event_image    | イベントの画像ファイル | String   | No     | Yes      |
+| event_club_id  | イベントが行われた部活 | Integer  | No     | No       |
+| created_at     | 作成日時               | DateTime | No     | No       |
+| updated_at     | 更新日時               | DateTime | No     | No       |
 
 ## Post Data（投稿データ）
 
@@ -366,3 +366,59 @@ erDiagram
 - 活動一覧
   - 活動日時、場所、詳細、参加者数、投稿数
 - 前のページに戻るボタン
+
+# API 設計
+
+## ユーザー関連
+
+| HTTP メソッド | エンドポイント  | 説明             | 優先度 |
+| ------------- | --------------- | ---------------- | ------ |
+| GET           | /users          | ユーザー一覧     | 低     |
+| POST          | /users          | ユーザー登録     | 高     |
+| GET           | /users/:user_id | ユーザー詳細     | 中     |
+| PUT           | /users/:user_id | ユーザー情報更新 | 低     |
+| DELETE        | /users/:user_id | ユーザー削除     | 低     |
+| GET           | /me             | ログインユーザー | 高     |
+| POST          | /login          | ログイン         | 高     |
+
+## 部活動データ関連
+
+| HTTP メソッド | エンドポイント  | 説明           | 優先度 |
+| ------------- | --------------- | -------------- | ------ |
+| GET           | /clubs          | 部活動一覧     | 高     |
+| POST          | /clubs          | 部活動登録     | 高     |
+| GET           | /clubs/:club_id | 部活動詳細     | 中     |
+| PUT           | /clubs/:club_id | 部活動情報更新 | 低     |
+| DELETE        | /clubs/:club_id | 部活動削除     | 低     |
+
+## 活動データ関連
+
+| HTTP メソッド | エンドポイント             | 説明         | 優先度 |
+| ------------- | -------------------------- | ------------ | ------ |
+| GET           | /clubs/:club_id/activities | 活動一覧     | 中     |
+| POST          | /clubs/:club_id/activities | 活動登録     | 高     |
+| GET           | /activities/:activity_id   | 活動詳細     | 低     |
+| PUT           | /activities/:activity_id   | 活動情報更新 | 低     |
+| DELETE        | /activities/:activity_id   | 活動削除     | 低     |
+
+## イベントデータ関連
+
+| HTTP メソッド | エンドポイント         | 説明             | 優先度 |
+| ------------- | ---------------------- | ---------------- | ------ |
+| GET           | /events                | イベント一覧     | 低     |
+| GET           | /clubs/:club_id/events | イベント一覧     | 高     |
+| POST          | /clubs/:club_id/events | イベント登録     | 高     |
+| GET           | /events/:event_id      | イベント詳細     | 中     |
+| PUT           | /events/:event_id      | イベント情報更新 | 中     |
+| DELETE        | /events/:event_id      | イベント削除     | 中     |
+
+## 投稿データ関連
+
+| HTTP メソッド | エンドポイント        | 説明         | 優先度 |
+| ------------- | --------------------- | ------------ | ------ |
+| GET           | /posts                | 投稿一覧     | 低     |
+| GET           | /clubs/:club_id/posts | 投稿一覧     | 低     |
+| POST          | /clubs/:club_id/posts | 投稿登録     | 高     |
+| GET           | /posts/:post_id       | 投稿詳細     | 低     |
+| PUT           | /posts/:post_id       | 投稿情報更新 | 高     |
+| DELETE        | /posts/:post_id       | 投稿削除     | 高     |
