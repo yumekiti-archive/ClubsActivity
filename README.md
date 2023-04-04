@@ -60,6 +60,13 @@ section 保守・運用
 - 部活動の一覧を閲覧できる。
 - 部活動の詳細情報を閲覧できる。
 
+## イベント関連
+
+- イベントを新規作成できる。
+- イベントの詳細情報を編集できる。
+- 自分が参加したイベントの一覧を閲覧できる。
+- イベントの詳細情報を閲覧できる。
+
 ## 活動関連
 
 - 活動を新規作成できる。
@@ -126,6 +133,7 @@ erDiagram
     Activity ||--o{ Post : "投稿される"
     Activity ||--|{ User : "参加する"
     Post ||--|{ Comment : "コメントされる"
+    Event ||--o{ Club : "開催する"
     User {
         integer user_id
         string user_uid
@@ -154,6 +162,15 @@ erDiagram
         text activity_detail
         integer[] activity_user_id
         integer activity_club_id
+        datetime created_at
+        datetime updated_at
+    }
+    Event {
+        integer event_id
+        string event_name
+        string event_place
+        text event_detail
+        integer event_club_id
         datetime created_at
         datetime updated_at
     }
@@ -222,6 +239,21 @@ erDiagram
 | activity_club_id | 活動が行われた部活動 ID | Integer   | No     | No       |
 | created_at       | 作成日時                | DateTime  | No     | No       |
 | updated_at       | 更新日時                | DateTime  | No     | No       |
+
+## Event Data（イベントデータ）
+
+| カラム名        | 説明                    | 型       | Unique | Nullable |
+| --------------- | ----------------------- | -------- | ------ | -------- |
+| event_id        | イベント ID             | Integer  | Yes    | No       |
+| event_name      | イベント名              | String   | No     | No       |
+| event_detail    | イベント詳細            | Text     | No     | Yes      |
+| event_place     | イベント場所            | String   | No     | No       |
+| event_start_at  | イベント開始日時        | DateTime | No     | No       |
+| event_end_at    | イベント終了日時        | DateTime | No     | No       |
+| event_image     | イベントの画像ファイル  | String   | No     | Yes      |
+| event_club_id   | イベントが行われた部活 | Integer  | No     | No       |
+| created_at      | 作成日時                | DateTime | No     | No       |
+| updated_at      | 更新日時                | DateTime | No     | No       |
 
 ## Post Data（投稿データ）
 
