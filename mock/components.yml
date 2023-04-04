@@ -14,6 +14,10 @@ parameters:
     schema:
       type: integer
 schemas:
+  Users:
+    type: array
+    items:
+      $ref: "#/schemas/User"
   User:
     type: object
     properties:
@@ -26,18 +30,18 @@ schemas:
       user_name:
         type: string
         description: ユーザー名
+      user_class:
+        type: string
+        description: ユーザーの学年
       password:
         type: string
         description: パスワード
       user_icon:
         type: string
         description: ユーザーアイコンのURL
-      readme:
+      user_readme:
         type: string
         description: 自己紹介文
-      activity_count:
-        type: integer
-        description: アクティビティ数
       affiliated_club_id:
         type: array
         items:
@@ -52,13 +56,13 @@ schemas:
         format: date-time
         description: 更新日時
     example:
-      user_id: 123
-      user_uid: "abcde12345"
-      user_name: "山田太郎"
-      password: "password123"
+      user_id: 1
+      user_uid: "220000"
+      user_name: "ほげ太郎"
+      user_class: "IE1A"
+      password: "password"
       user_icon: "https://example.com/user_icon.png"
-      readme: "こんにちは、山田太郎です。よろしくお願いします。"
-      activity_count: 5
+      user_readme: "自己紹介文"
       affiliated_club_id: [1, 2]
       created_at: "2022-03-15T10:30:00Z"
       updated_at: "2022-04-01T14:45:00Z"
@@ -94,10 +98,6 @@ schemas:
         type: string
         nullable: true
         description: 部活動のカテゴリ
-      club_logo_image:
-        type: string
-        nullable: true
-        description: 部活動のロゴ画像ファイル
       created_at:
         type: string
         format: date-time
@@ -111,7 +111,6 @@ schemas:
       club_name: "サッカー部"
       club_description: "サッカー部です。"
       club_category: "スポーツ"
-      club_logo_image: "https://example.com/club_logo_image.png"
       created_at: "2022-03-15T10:30:00Z"
       updated_at: "2022-04-01T14:45:00Z"
   Clubs:
@@ -119,7 +118,11 @@ schemas:
     items:
       $ref: "#/schemas/Club"
 responses:
+  Unauthorized:
+    description: 認証に失敗しました。
   BadRequest:
     description: リクエストが不正です。
   ServerError:
     description: サーバーでエラーが発生しました。
+  NotFound:
+    description: リソースが見つかりませんでした。

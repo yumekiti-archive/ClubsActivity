@@ -1,0 +1,17 @@
+summary: ログインユーザーの所属している部活動一覧を取得する
+description: |
+  ログインユーザーの所属している部活動一覧を取得するAPIです。
+  ### レスポンス
+  - 200: 成功時はログインユーザーの所属している部活動一覧を返します。
+  - 401: ログインしていない場合に返されます。
+responses:
+  '200':
+    description: ログインユーザーの所属している部活動一覧の取得に成功しました。
+    content:
+      application/json:
+        schema:
+          $ref: "../components.yml#/schemas/Clubs"
+  '401':
+    $ref: "../components.yml#/responses/Unauthorized"
+  '500':
+    $ref: "../components.yml#/responses/ServerError"

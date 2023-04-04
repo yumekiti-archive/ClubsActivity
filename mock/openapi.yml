@@ -10,16 +10,23 @@ servers:
     description: "Local server"
 
 paths:
-  /users/{user_id}:
+  /me:
     get:
-      $ref: "./paths/get-user.yml"
-    # post:
-    #   $ref: "./paths/user/post-user.yml"
+      $ref: "./paths/get-me.yml"
+  /me/clubs:
+    get:
+      $ref: "./paths/get-me-clubs.yml"
   /clubs:
     get:
       $ref: "./paths/get-clubs.yml"
   /clubs/{club_id}:
     get:
       $ref: "./paths/get-club.yml"
+  /clubs/{club_id}/members:
+    get:
+      $ref: "./paths/get-club-members.yml"
+  /clubs/{club_id}/events:
+    get:
+      $ref: "./paths/get-club-events.yml"
 components:
   $ref: "./components.yml"

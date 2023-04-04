@@ -1,0 +1,20 @@
+summary: 部活動のメンバー一覧を取得する
+description: |
+  部活動のメンバー一覧を取得するAPIです。
+  ### レスポンス
+  - 200: 成功時は部活動のメンバー一覧を返します。
+  - 401: ログインしていない場合に返されます。
+  - 404: 部活動が存在しない場合に返されます。
+responses:
+  '200':
+    description: 部活動のメンバー一覧の取得に成功しました。
+    content:
+      application/json:
+        schema:
+          $ref: "../components.yml#/schemas/Users"
+  '401':
+    $ref: "../components.yml#/responses/Unauthorized"
+  '404':
+    $ref: "../components.yml#/responses/NotFound"
+  '500':
+    $ref: "../components.yml#/responses/ServerError"
