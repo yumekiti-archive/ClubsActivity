@@ -16,15 +16,19 @@ services:
       "
 
   api:
-    image: node:18.15.0-alpine
+    image: golang:1.19-alpine
     container_name: clubActivity-api
-    working_dir: /app
+    working_dir: /go/src/app
     volumes:
-      - ./api:/app
+      - ./api:/go/src/app
     ports:
-      - 1337:1337
+      - '8080:8080'
+    environment:
+      TZ: Asia/Tokyo
+      GO111MODULE: 'on'
     command: >
       sh -c "
-        yarn &&
-        yarn develop
+        apk add --no-cache gcc musl-dev &&
+        go install github.com/cosmtrek/air@latest &&
+        air
       "
