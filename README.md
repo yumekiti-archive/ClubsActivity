@@ -129,15 +129,16 @@ erDiagram
     User ||--o{ Activity : "参加する"
     User ||--o{ Post : "投稿する"
     User ||--o{ Comment : "コメントする"
+    Club ||--o{ Activity : "開催する"
     Club ||--o{ User : "所属する"
-    Activity ||--o{ Post : "投稿される"
-    Activity ||--|{ User : "参加する"
+    Club ||--o{ Post : "投稿する"
+    Club ||--o{ Event : "開催する"
     Post ||--|{ Comment : "コメントされる"
-    Event ||--o{ Club : "開催する"
     User {
         integer user_id
         string user_uid
         string user_name
+        string user_class
         string password
         string user_icon
         string readme
@@ -182,7 +183,7 @@ erDiagram
         string posted_image
         integer view_count
         integer poster_user_id
-        integer posted_activity_id
+        integer posted_club_id
         datetime created_at
         datetime updated_at
     }
@@ -207,26 +208,24 @@ erDiagram
 | user_id            | ユーザー ID                | Integer   | Yes    | No       |
 | user_uid           | ユーザー UID               | String    | Yes    | No       |
 | user_name          | ユーザー名                 | String    | No     | No       |
+| user_class         | 学年                       | String    | No     | No       |
 | password           | パスワード                 | String    | No     | No       |
 | user_icon          | ユーザーアイコン           | String    | No     | Yes      |
-| readme             | 自己紹介                   | String    | No     | Yes      |
-| activity_count     | 活動回数                   | Integer   | No     | No       |
+| user_readme        | 自己紹介                   | String    | No     | Yes      |
 | affiliated_club_id | 所属している部活動（複数） | Integer[] | No     | Yes      |
-| activity_id        | 参加している活動（複数）   | Integer[] | No     | Yes      |
 | created_at         | 作成日時                   | DateTime  | No     | No       |
 | updated_at         | 更新日時                   | DateTime  | No     | No       |
 
 ## Club Data（部活動データ）
 
-| カラム名         | 説明                     | 型       | Unique | Nullable |
-| ---------------- | ------------------------ | -------- | ------ | -------- |
-| club_id          | 部活動 ID                | Integer  | Yes    | No       |
-| club_name        | 部活動名                 | String   | Yes    | No       |
-| club_description | 部活動の説明             | String   | No     | Yes      |
-| club_category    | 部活動のカテゴリ         | String   | No     | Yes      |
-| club_logo_image  | 部活動のロゴ画像ファイル | String   | No     | Yes      |
-| created_at       | 作成日時                 | DateTime | No     | No       |
-| updated_at       | 更新日時                 | DateTime | No     | No       |
+| カラム名         | 説明             | 型       | Unique | Nullable |
+| ---------------- | ---------------- | -------- | ------ | -------- |
+| club_id          | 部活動 ID        | Integer  | Yes    | No       |
+| club_name        | 部活動名         | String   | Yes    | No       |
+| club_description | 部活動の説明     | String   | No     | Yes      |
+| club_category    | 部活動のカテゴリ | String   | No     | Yes      |
+| created_at       | 作成日時         | DateTime | No     | No       |
+| updated_at       | 更新日時         | DateTime | No     | No       |
 
 ## Activity Data（活動データ）
 
@@ -257,18 +256,18 @@ erDiagram
 
 ## Post Data（投稿データ）
 
-| カラム名           | 説明                   | 型       | Unique | Nullable |
-| ------------------ | ---------------------- | -------- | ------ | -------- |
-| post_id            | 投稿 ID                | Integer  | Yes    | No       |
-| title              | タイトル               | String   | No     | No       |
-| content            | 投稿内容               | Text     | No     | No       |
-| poster_user_name   | 投稿者のユーザー名     | String   | No     | No       |
-| posted_image       | 投稿された画像ファイル | String   | No     | Yes      |
-| view_count         | 閲覧数                 | Integer  | No     | No       |
-| poster_user_id     | 投稿者のユーザー ID    | Integer  | No     | No       |
-| posted_activity_id | 投稿された活動 ID      | Integer  | No     | No       |
-| created_at         | 作成日時               | DateTime | No     | No       |
-| updated_at         | 更新日時               | DateTime | No     | No       |
+| カラム名         | 説明                   | 型       | Unique | Nullable |
+| ---------------- | ---------------------- | -------- | ------ | -------- |
+| post_id          | 投稿 ID                | Integer  | Yes    | No       |
+| title            | タイトル               | String   | No     | No       |
+| content          | 投稿内容               | Text     | No     | No       |
+| poster_user_name | 投稿者のユーザー名     | String   | No     | No       |
+| posted_image     | 投稿された画像ファイル | String   | No     | Yes      |
+| view_count       | 閲覧数                 | Integer  | No     | No       |
+| poster_user_id   | 投稿者のユーザー ID    | Integer  | No     | No       |
+| posted_club_id   | 投稿された部活 ID      | Integer  | No     | No       |
+| created_at       | 作成日時               | DateTime | No     | No       |
+| updated_at       | 更新日時               | DateTime | No     | No       |
 
 ## Comment Data（コメントデータ）
 
@@ -393,13 +392,14 @@ erDiagram
 
 ## 活動データ関連
 
-| HTTP メソッド | エンドポイント             | 説明         | 優先度 |
-| ------------- | -------------------------- | ------------ | ------ |
-| GET           | /clubs/:club_id/activities | 活動一覧     | 中     |
-| POST          | /clubs/:club_id/activities | 活動登録     | 高     |
-| GET           | /activities/:activity_id   | 活動詳細     | 低     |
-| PUT           | /activities/:activity_id   | 活動情報更新 | 低     |
-| DELETE        | /activities/:activity_id   | 活動削除     | 低     |
+| HTTP メソッド | エンドポイント                  | 説明         | 優先度 |
+| ------------- | ------------------------------- | ------------ | ------ |
+| GET           | /clubs/:club_id/activities/join | 活動参加     | 低     |
+| GET           | /clubs/:club_id/activities      | 活動一覧     | 中     |
+| POST          | /clubs/:club_id/activities      | 活動登録     | 高     |
+| GET           | /activities/:activity_id        | 活動詳細     | 低     |
+| PUT           | /activities/:activity_id        | 活動情報更新 | 低     |
+| DELETE        | /activities/:activity_id        | 活動削除     | 低     |
 
 ## イベントデータ関連
 
