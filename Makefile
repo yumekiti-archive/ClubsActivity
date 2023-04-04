@@ -29,8 +29,14 @@ api:
 format:
 	$(dc) exec web yarn format
 
-mock:
-	$(ds) down
+mock-up:
 	$(ds) up -d
+
+mock-down:
+	$(ds) down
+
+mock-reup:
+	@make mock-down
+	@make mock
 
 .PHONY:	up down restart reup rm logs web api mock
