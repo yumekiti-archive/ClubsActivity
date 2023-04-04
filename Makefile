@@ -1,5 +1,4 @@
 dc := docker compose -f ./docker-compose.yml
-ds := docker compose -f ./docker-compose.swagger.yml
 
 up:
 	$(dc) up -d
@@ -29,14 +28,4 @@ api:
 format:
 	$(dc) exec web yarn format
 
-mock-up:
-	$(ds) up -d
-
-mock-down:
-	$(ds) down
-
-mock-reup:
-	@make mock-down
-	@make mock
-
-.PHONY:	up down restart reup rm logs web api mock
+.PHONY:	up down restart reup rm logs web api format
