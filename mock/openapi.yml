@@ -25,8 +25,5 @@ paths:
   /clubs/{club_id}/members:
     get:
       $ref: "./paths/get-club-members.yml"
-  /clubs/{club_id}/events:
-    get:
-      $ref: "./paths/get-club-events.yml"
 components:
   $ref: "./components.yml"
