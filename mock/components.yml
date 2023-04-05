@@ -42,10 +42,8 @@ schemas:
       user_readme:
         type: string
         description: 自己紹介文
-      affiliated_club_id:
-        type: array
-        items:
-          type: integer
+      affiliated_clubs:
+        $ref: "#/schemas/Clubs"
         description: 所属するクラブのID
       created_at:
         type: string
@@ -61,9 +59,10 @@ schemas:
       user_name: "ほげ太郎"
       user_class: "IE1A"
       password: "password"
-      user_icon: "https://example.com/user_icon.png"
+      user_icon: "https://source.unsplash.com/random"
       user_readme: "自己紹介文"
-      affiliated_club_id: [1]
+      affiliated_clubs:
+        $ref: "#/schemas/Clubs/example"
       created_at: "2022-03-15T10:30:00Z"
       updated_at: "2022-04-01T14:45:00Z"
   UserInput:
@@ -117,6 +116,19 @@ schemas:
     type: array
     items:
       $ref: "#/schemas/Club"
+    example:
+      - club_id: 1
+        club_name: "サッカー部"
+        club_description: "サッカー部です。"
+        club_category: "スポーツ"
+        created_at: "2022-03-15T10:30:00Z"
+        updated_at: "2022-04-01T14:45:00Z"
+      - club_id: 2
+        club_name: "野球部"
+        club_description: "野球部です。"
+        club_category: "スポーツ"
+        created_at: "2022-03-15T10:30:00Z"
+        updated_at: "2022-04-01T14:45:00Z"
 responses:
   Unauthorized:
     description: 認証に失敗しました。
