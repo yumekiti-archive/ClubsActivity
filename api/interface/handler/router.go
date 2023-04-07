@@ -11,6 +11,7 @@ import (
 func InitRouting(
 	e *echo.Echo,
 	userHandler UserHandler,
+	clubHandler ClubHandler,
 ) {
 	// 以下のルーティングはJWT認証が必要
 	r := e.Group("")
@@ -18,4 +19,8 @@ func InitRouting(
 
 	// user関連
 	e.GET("/me", userHandler.FindMe())
+
+	// club関連
+	e.GET("/clubs", clubHandler.FindAll())
+	e.GET("/clubs/:id", clubHandler.FindByID())
 }

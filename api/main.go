@@ -17,10 +17,13 @@ func init() {
 func main() {
 	// repository
 	userRepository := infrastructure.NewUserRepository()
+	clubRepository := infrastructure.NewClubRepository()
 	// usecase
 	userUsecase := usecase.NewUserUsecase(userRepository)
+	clubUsecase := usecase.NewClubUsecase(clubRepository)
 	// handler
 	userHandler := handler.NewUserHandler(userUsecase)
+	clubHandler := handler.NewClubHandler(clubUsecase)
 
 	// Echo instance
 	e := echo.New()
@@ -38,6 +41,7 @@ func main() {
 	handler.InitRouting(
 		e,
 		userHandler,
+		clubHandler,
 	)
 
 	// Start server
