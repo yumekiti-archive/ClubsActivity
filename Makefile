@@ -28,4 +28,7 @@ api:
 format:
 	$(dc) exec web yarn format
 
-.PHONY:	up down restart reup rm logs web api format
+fmt:
+	$(dc) exec api go fmt ./...
+
+.PHONY:	up down restart reup rm logs web api format fmt
