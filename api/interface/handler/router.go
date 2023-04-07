@@ -19,6 +19,7 @@ func InitRouting(
 
 	// user関連
 	e.GET("/me", userHandler.FindMe())
+	e.POST("/users", userHandler.Store())
 
 	// club関連
 	e.GET("/clubs", clubHandler.FindAll())

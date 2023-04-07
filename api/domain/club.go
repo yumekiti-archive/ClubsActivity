@@ -18,10 +18,10 @@ import (
 )
 
 type Club struct {
-	ClubID          int
-	ClubName        string
-	ClubDescription string
-	ClubCategory    string
-	CreatedAt       time.Time
-	UpdatedAt       time.Time
+	ID          int `gorm:"primary_key"`
+	Name        string
+	Description string
+	Category    string
+	CreatedAt   time.Time `gorm:"autoCreateTime"`
+	UpdatedAt   time.Time `gorm:"autoUpdateTime"`
 }

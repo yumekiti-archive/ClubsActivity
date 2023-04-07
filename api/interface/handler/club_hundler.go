@@ -42,10 +42,10 @@ func (h *clubHandler) FindAll() echo.HandlerFunc {
 		var responseClubs []responseClub
 		for _, club := range clubs {
 			responseClubs = append(responseClubs, responseClub{
-				ID:          club.ClubID,
-				Name:        club.ClubName,
-				Description: club.ClubDescription,
-				Category:    club.ClubCategory,
+				ID:          club.ID,
+				Name:        club.Name,
+				Description: club.Description,
+				Category:    club.Category,
 				CreatedAt:   club.CreatedAt.Format("2006-01-02 15:04:05"),
 				UpdatedAt:   club.UpdatedAt.Format("2006-01-02 15:04:05"),
 			})
@@ -68,10 +68,10 @@ func (h *clubHandler) FindByID() echo.HandlerFunc {
 		}
 
 		return c.JSON(http.StatusOK, responseClub{
-			ID:          club.ClubID,
-			Name:        club.ClubName,
-			Description: club.ClubDescription,
-			Category:    club.ClubCategory,
+			ID:          club.ID,
+			Name:        club.Name,
+			Description: club.Description,
+			Category:    club.Category,
 			CreatedAt:   club.CreatedAt.Format("2006-01-02 15:04:05"),
 			UpdatedAt:   club.UpdatedAt.Format("2006-01-02 15:04:05"),
 		})

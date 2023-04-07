@@ -1,54 +1,57 @@
 package infrastructure
 
 import (
+	"gorm.io/gorm"
 	"time"
 
 	"api/domain"
 	"api/domain/repository"
 )
 
-type clubRepository struct{}
+type clubRepository struct {
+	Conn *gorm.DB
+}
 
-func NewClubRepository() repository.ClubRepository {
-	return &clubRepository{}
+func NewClubRepository(conn *gorm.DB) repository.ClubRepository {
+	return &clubRepository{Conn: conn}
 }
 
 func (cr *clubRepository) FindAll() ([]domain.Club, error) {
 	return []domain.Club{
 		{
-			ClubID:          1,
-			ClubName:        "test",
-			ClubDescription: "test",
-			ClubCategory:    "test",
-			CreatedAt:       time.Now(),
-			UpdatedAt:       time.Now(),
+			ID:          1,
+			Name:        "test",
+			Description: "test",
+			Category:    "test",
+			CreatedAt:   time.Now(),
+			UpdatedAt:   time.Now(),
 		},
 		{
-			ClubID:          2,
-			ClubName:        "test",
-			ClubDescription: "test",
-			ClubCategory:    "test",
-			CreatedAt:       time.Now(),
-			UpdatedAt:       time.Now(),
+			ID:          2,
+			Name:        "test",
+			Description: "test",
+			Category:    "test",
+			CreatedAt:   time.Now(),
+			UpdatedAt:   time.Now(),
 		},
 		{
-			ClubID:          3,
-			ClubName:        "test",
-			ClubDescription: "test",
-			ClubCategory:    "test",
-			CreatedAt:       time.Now(),
-			UpdatedAt:       time.Now(),
+			ID:          3,
+			Name:        "test",
+			Description: "test",
+			Category:    "test",
+			CreatedAt:   time.Now(),
+			UpdatedAt:   time.Now(),
 		},
 	}, nil
 }
 
 func (cr *clubRepository) FindByID(id int) (domain.Club, error) {
 	return domain.Club{
-		ClubID:          1,
-		ClubName:        "test",
-		ClubDescription: "test",
-		ClubCategory:    "test",
-		CreatedAt:       time.Now(),
-		UpdatedAt:       time.Now(),
+		ID:          1,
+		Name:        "test",
+		Description: "test",
+		Category:    "test",
+		CreatedAt:   time.Now(),
+		UpdatedAt:   time.Now(),
 	}, nil
 }

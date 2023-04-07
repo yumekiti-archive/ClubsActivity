@@ -21,13 +21,13 @@ import (
 )
 
 type User struct {
-	UserID          int
-	UserUID         string
-	UserName        string
-	UserClass       string
-	UserIcon        string
-	UserReadme      string
-	AffiliatedClubs []Club
-	CreatedAt       time.Time
-	UpdatedAt       time.Time
+	ID        int    `gorm:"primary_key"`
+	UID       string `gorm:"unique"`
+	Name      string
+	Class     string
+	Icon      string
+	Readme    string
+	Clubs     []Club    `gorm:"many2many:user_clubs;"`
+	CreatedAt time.Time `gorm:"autoCreateTime"`
+	UpdatedAt time.Time `gorm:"autoUpdateTime"`
 }

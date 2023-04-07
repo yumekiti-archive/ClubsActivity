@@ -6,7 +6,9 @@ import (
 )
 
 type UserUsecase interface {
-	FindMe() (domain.User, error)
+	FindMe(id int) (*domain.User, error)
+	Store(user *domain.User) (*domain.User, error)
+	FindByClubID(id int) ([]*domain.User, error)
 }
 
 type userUsecase struct {
@@ -19,6 +21,26 @@ func NewUserUsecase(ur repository.UserRepository) UserUsecase {
 	}
 }
 
-func (uu *userUsecase) FindMe() (domain.User, error) {
-	return uu.userRepository.FindMe()
+func (uu *userUsecase) FindMe(id int) (*domain.User, error) {
+	user, err := uu.userRepository.FindMe(id)
+	if err != nil {
+		return user, err
+	}
+	return user, nil
+}
+
+func (uu *userUsecase) Store(user *domain.User) (*domain.User, error) {
+	user, err := uu.userRepository.Store(user)
+	if err != nil {
+		return user, err
+	}
+	return user, nil
+}
+
+func (uu *userUsecase) FindByClubID(id int) ([]*domain.User, error) {
+	users, err := uu.userRepository.FindByClubID(id)
+	if err != nil {
+		return users, err
+	}
+	return users, nil
 }

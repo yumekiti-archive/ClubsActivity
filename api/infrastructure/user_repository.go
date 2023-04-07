@@ -1,38 +1,39 @@
 package infrastructure
 
 import (
-	"time"
+	"gorm.io/gorm"
 
 	"api/domain"
 	"api/domain/repository"
 )
 
-type userRepository struct{}
-
-func NewUserRepository() repository.UserRepository {
-	return &userRepository{}
+type userRepository struct {
+	Conn *gorm.DB
 }
 
-func (ur *userRepository) FindMe() (domain.User, error) {
-	var affiliatedClubs []domain.Club
-	affiliatedClubs = append(affiliatedClubs, domain.Club{
-		ClubID:          1,
-		ClubName:        "test",
-		ClubDescription: "test",
-		ClubCategory:    "test",
-		CreatedAt:       time.Now(),
-		UpdatedAt:       time.Now(),
-	})
+func NewUserRepository(conn *gorm.DB) repository.UserRepository {
+	return &userRepository{Conn: conn}
+}
 
-	return domain.User{
-		UserID:     1,
-		UserUID:    "test",
-		UserName:   "test",
-		UserClass:  "test",
-		UserIcon:   "test",
-		UserReadme: "test",
-		AffiliatedClubs: affiliatedClubs,
-		CreatedAt: time.Now(),
-		UpdatedAt: time.Now(),
-	}, nil
+func (ur *userRepository) FindMe(id int) (*domain.User, error) {
+	user := &domain.User{}
+	if err := ur.Conn.First(user, id).Error; err != nil {
+		return user, err
+	}
+	return user, nil
+}
+
+func (ur *userRepository) Store(user *domain.User) (*domain.User, error) {
+	if err := ur.Conn.Create(user).Error; err != nil {
+		return user, err
+	}
+	return user, nil
+}
+
+func (ur *userRepository) FindByClubID(id int) ([]*domain.User, error) {
+	users := []*domain.User{}
+	if err := ur.Conn.Where("club_id = ?", id).Find(&users).Error; err != nil {
+		return users, err
+	}
+	return users, nil
 }
