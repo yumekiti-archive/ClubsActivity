@@ -15,9 +15,12 @@ func init() {
 }
 
 func main() {
+	// database
+	db := config.NewDB()
+
 	// repository
-	userRepository := infrastructure.NewUserRepository()
-	clubRepository := infrastructure.NewClubRepository()
+	userRepository := infrastructure.NewUserRepository(db)
+	clubRepository := infrastructure.NewClubRepository(db)
 	// usecase
 	userUsecase := usecase.NewUserUsecase(userRepository)
 	clubUsecase := usecase.NewClubUsecase(clubRepository)
