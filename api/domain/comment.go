@@ -19,11 +19,11 @@ import (
 )
 
 type Comment struct {
-	CommentID          int
-	CommentBody        string
-	CommenterUserName  string
-	CommenterUserID    int
-	CommentedPostID    int
-	CreatedAt          time.Time
-	UpdatedAt          time.Time
+	CommentID         int
+	CommentBody       string
+	CommenterUserName string
+	CommenterUserID   int
+	CommentedPostID   int
+	CreatedAt         time.Time
+	UpdatedAt         time.Time
 }

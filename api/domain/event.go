@@ -22,14 +22,14 @@ import (
 )
 
 type Event struct {
-	EventID       int
-	EventName     string
-	EventDetail   string
-	EventPlace    string
-	EventStartAt  time.Time
-	EventEndAt    time.Time
-	EventImage    string
-	EventClubID   int
-	CreatedAt     time.Time
-	UpdatedAt     time.Time
+	EventID      int
+	EventName    string
+	EventDetail  string
+	EventPlace   string
+	EventStartAt time.Time
+	EventEndAt   time.Time
+	EventImage   string
+	EventClubID  int
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
 }

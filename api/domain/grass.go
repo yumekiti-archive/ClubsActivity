@@ -17,9 +17,9 @@ import (
 )
 
 type Grass struct {
-	GrassID            int
-	GrassUserID        int
-	GrassedActivityID  int
-	CreatedAt          time.Time
-	UpdatedAt          time.Time
+	GrassID           int
+	GrassUserID       int
+	GrassedActivityID int
+	CreatedAt         time.Time
+	UpdatedAt         time.Time
 }

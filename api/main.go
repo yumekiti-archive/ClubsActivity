@@ -1,12 +1,13 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
 	"api/config"
+	"api/infrastructure"
+	"api/interface/handler"
+	"api/usecase"
 )
 
 func init() {
@@ -14,6 +15,13 @@ func init() {
 }
 
 func main() {
+	// repository
+	userRepository := infrastructure.NewUserRepository()
+	// usecase
+	userUsecase := usecase.NewUserUsecase(userRepository)
+	// handler
+	userHandler := handler.NewUserHandler(userUsecase)
+
 	// Echo instance
 	e := echo.New()
 
@@ -27,9 +35,10 @@ func main() {
 	}))
 
 	// Router
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!!")
-	})
+	handler.InitRouting(
+		e,
+		userHandler,
+	)
 
 	// Start server
 	e.Logger.Fatal(e.Start(":" + config.GetEnv("PORT", "8080")))

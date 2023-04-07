@@ -22,14 +22,14 @@ import (
 )
 
 type Post struct {
-	PostID          int
-	Title           string
-	Content         string
-	PosterUserName  string
-	PostedImage     string
-	ViewCount       int
-	PosterUserID    int
-	PostedClubID    int
-	CreatedAt       time.Time
-	UpdatedAt       time.Time
+	PostID         int
+	Title          string
+	Content        string
+	PosterUserName string
+	PostedImage    string
+	ViewCount      int
+	PosterUserID   int
+	PostedClubID   int
+	CreatedAt      time.Time
+	UpdatedAt      time.Time
 }

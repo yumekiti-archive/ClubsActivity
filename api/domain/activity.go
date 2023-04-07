@@ -19,11 +19,11 @@ import (
 )
 
 type Activity struct {
-	ActivityID      int
-	ActivityPlace   string
-	ActivityDetail  string
-	ActivityUserID  []int
-	ActivityClubID  int
-	CreatedAt       time.Time
-	UpdatedAt       time.Time
+	ActivityID     int
+	ActivityPlace  string
+	ActivityDetail string
+	ActivityUserID []int
+	ActivityClubID int
+	CreatedAt      time.Time
+	UpdatedAt      time.Time
 }
