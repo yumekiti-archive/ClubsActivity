@@ -15,14 +15,23 @@ func NewUserRepository() repository.UserRepository {
 
 func (ur *userRepository) FindMe() (domain.User, error) {
 	return domain.User{
-		UserID:           1,
-		UserUID:          "test",
-		UserName:         "test",
-		UserClass:        "test",
-		UserIcon:         "test",
-		UserReadme:       "test",
-		AffiliatedClubID: []int{1, 2, 3},
-		CreatedAt:        time.Now(),
-		UpdatedAt:        time.Now(),
+		UserID:     1,
+		UserUID:    "test",
+		UserName:   "test",
+		UserClass:  "test",
+		UserIcon:   "test",
+		UserReadme: "test",
+		AffiliatedClubs: []domain.Club{
+			domain.Club{
+				ClubID:          1,
+				ClubName:        "test",
+				ClubDescription: "test",
+				ClubCategory:    "test",
+				CreatedAt:       time.Now(),
+				UpdatedAt:       time.Now(),
+			},
+		},
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
 	}, nil
 }

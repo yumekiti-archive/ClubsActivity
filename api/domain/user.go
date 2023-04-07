@@ -21,13 +21,13 @@ import (
 )
 
 type User struct {
-	UserID           int
-	UserUID          string
-	UserName         string
-	UserClass        string
-	UserIcon         string
-	UserReadme       string
-	AffiliatedClubID []int
-	CreatedAt        time.Time
-	UpdatedAt        time.Time
+	UserID          int
+	UserUID         string
+	UserName        string
+	UserClass       string
+	UserIcon        string
+	UserReadme      string
+	AffiliatedClubs []Club
+	CreatedAt       time.Time
+	UpdatedAt       time.Time
 }
