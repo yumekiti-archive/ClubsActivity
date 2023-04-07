@@ -14,6 +14,16 @@ func NewUserRepository() repository.UserRepository {
 }
 
 func (ur *userRepository) FindMe() (domain.User, error) {
+	var affiliatedClubs []domain.Club
+	affiliatedClubs = append(affiliatedClubs, domain.Club{
+		ClubID:          1,
+		ClubName:        "test",
+		ClubDescription: "test",
+		ClubCategory:    "test",
+		CreatedAt:       time.Now(),
+		UpdatedAt:       time.Now(),
+	})
+
 	return domain.User{
 		UserID:     1,
 		UserUID:    "test",
@@ -21,16 +31,7 @@ func (ur *userRepository) FindMe() (domain.User, error) {
 		UserClass:  "test",
 		UserIcon:   "test",
 		UserReadme: "test",
-		AffiliatedClubs: []domain.Club{
-			domain.Club{
-				ClubID:          1,
-				ClubName:        "test",
-				ClubDescription: "test",
-				ClubCategory:    "test",
-				CreatedAt:       time.Now(),
-				UpdatedAt:       time.Now(),
-			},
-		},
+		AffiliatedClubs: affiliatedClubs,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}, nil
