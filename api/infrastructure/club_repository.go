@@ -21,7 +21,7 @@ func (cr *clubRepository) FindAll() ([]domain.Club, error) {
 		{
 			ID:          1,
 			Name:        "test",
-			Description: "test",
+			Readme: "test",
 			Category:    "test",
 			CreatedAt:   time.Now(),
 			UpdatedAt:   time.Now(),
@@ -29,7 +29,7 @@ func (cr *clubRepository) FindAll() ([]domain.Club, error) {
 		{
 			ID:          2,
 			Name:        "test",
-			Description: "test",
+			Readme: "test",
 			Category:    "test",
 			CreatedAt:   time.Now(),
 			UpdatedAt:   time.Now(),
@@ -37,7 +37,7 @@ func (cr *clubRepository) FindAll() ([]domain.Club, error) {
 		{
 			ID:          3,
 			Name:        "test",
-			Description: "test",
+			Readme: "test",
 			Category:    "test",
 			CreatedAt:   time.Now(),
 			UpdatedAt:   time.Now(),
@@ -49,7 +49,7 @@ func (cr *clubRepository) FindByID(id int) (domain.Club, error) {
 	return domain.Club{
 		ID:          1,
 		Name:        "test",
-		Description: "test",
+		Readme: "test",
 		Category:    "test",
 		CreatedAt:   time.Now(),
 		UpdatedAt:   time.Now(),

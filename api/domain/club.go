@@ -20,7 +20,7 @@ import (
 type Club struct {
 	ID          int `gorm:"primary_key"`
 	Name        string
-	Description string
+	Readme string
 	Category    string
 	CreatedAt   time.Time `gorm:"autoCreateTime"`
 	UpdatedAt   time.Time `gorm:"autoUpdateTime"`

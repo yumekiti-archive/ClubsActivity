@@ -40,12 +40,12 @@ func seeder(db *gorm.DB) error {
 	clubs := []domain.Club{
 		{
 			Name:        "サークルA",
-			Description: "サークルAの説明\nこれはサークルAの説明です。",
+			Readme: "サークルAの説明\nこれはサークルAの説明です。",
 			Category:    "IT",
 		},
 		{
 			Name:        "サークルB",
-			Description: "サークルBの説明",
+			Readme: "サークルBの説明",
 			Category:    "Game",
 		},
 	}

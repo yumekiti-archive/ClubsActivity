@@ -90,7 +90,7 @@ func (h *userHandler) FindMe() echo.HandlerFunc {
 			responseClubs = append(responseClubs, responseClub{
 				ID:          club.ID,
 				Name:        club.Name,
-				Description: club.Description,
+				Readme: club.Readme,
 				Category:    club.Category,
 				CreatedAt:   club.CreatedAt.Format("2006-01-02 15:04:05"),
 				UpdatedAt:   club.UpdatedAt.Format("2006-01-02 15:04:05"),

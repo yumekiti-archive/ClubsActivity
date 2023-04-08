@@ -26,7 +26,7 @@ type requestClub struct{}
 type responseClub struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
-	Description string `json:"description"`
+	Readme string `json:"readme"`
 	Category    string `json:"category"`
 	CreatedAt   string `json:"created_at"`
 	UpdatedAt   string `json:"updated_at"`
@@ -44,7 +44,7 @@ func (h *clubHandler) FindAll() echo.HandlerFunc {
 			responseClubs = append(responseClubs, responseClub{
 				ID:          club.ID,
 				Name:        club.Name,
-				Description: club.Description,
+				Readme: club.Readme,
 				Category:    club.Category,
 				CreatedAt:   club.CreatedAt.Format("2006-01-02 15:04:05"),
 				UpdatedAt:   club.UpdatedAt.Format("2006-01-02 15:04:05"),
@@ -70,7 +70,7 @@ func (h *clubHandler) FindByID() echo.HandlerFunc {
 		return c.JSON(http.StatusOK, responseClub{
 			ID:          club.ID,
 			Name:        club.Name,
-			Description: club.Description,
+			Readme: club.Readme,
 			Category:    club.Category,
 			CreatedAt:   club.CreatedAt.Format("2006-01-02 15:04:05"),
 			UpdatedAt:   club.UpdatedAt.Format("2006-01-02 15:04:05"),
