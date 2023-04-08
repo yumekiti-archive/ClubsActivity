@@ -4,6 +4,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/swaggo/echo-swagger"
+	"net/http"
 	_ "api/docs"
 
 	"api/config"
@@ -34,5 +35,8 @@ func InitRouting(
 	club.GET("/:id", clubHandler.FindByID())
 
 	// swagger
-	v1.GET("/swagger/*", echoSwagger.WrapHandler)
+	e.GET("/swagger/*", echoSwagger.WrapHandler)
+	e.GET("/swagger", func(c echo.Context) error {
+		return c.Redirect(http.StatusMovedPermanently, "/swagger/index.html")
+	})
 }
