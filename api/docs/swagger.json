@@ -1,0 +1,15 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/v1/me": {
+            "get": {
+                "description": "自分のユーザー情報を取得する",
+                "summary": "自分のユーザー情報を取得する",
+                "responses": {}
+            }
+        }
+    }
+}

@@ -78,6 +78,9 @@ func (h *userHandler) Store() echo.HandlerFunc {
 	}
 }
 
+// @Summary 自分のユーザー情報を取得する
+// @Description 自分のユーザー情報を取得する
+// @Router /v1/me [get]
 func (h *userHandler) FindMe() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		user, err := h.userUsecase.FindMe(220001)

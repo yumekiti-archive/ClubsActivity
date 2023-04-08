@@ -3,6 +3,8 @@ package handler
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/swaggo/echo-swagger"
+	_ "api/docs"
 
 	"api/config"
 )
@@ -30,4 +32,7 @@ func InitRouting(
 	club := v1.Group("/clubs")
 	club.GET("", clubHandler.FindAll())
 	club.GET("/:id", clubHandler.FindByID())
+
+	// swagger
+	v1.GET("/swagger/*", echoSwagger.WrapHandler)
 }

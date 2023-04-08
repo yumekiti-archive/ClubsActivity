@@ -1,0 +1,9 @@
+info:
+  contact: {}
+paths:
+  /v1/me:
+    get:
+      description: 自分のユーザー情報を取得する
+      responses: {}
+      summary: 自分のユーザー情報を取得する
+swagger: "2.0"
