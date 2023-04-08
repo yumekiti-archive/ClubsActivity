@@ -17,11 +17,17 @@ func InitRouting(
 	r := e.Group("")
 	r.Use(middleware.JWTWithConfig(*config.JWTConfig()))
 
+	// バージョン管理
+	v1 := e.Group("/v1")
+
 	// user関連
-	e.GET("/me", userHandler.FindMe())
-	e.POST("/users", userHandler.Store())
+	v1.GET("/me", userHandler.FindMe())
+
+	users := v1.Group("/users")
+	users.POST("", userHandler.Store())
 
 	// club関連
-	e.GET("/clubs", clubHandler.FindAll())
-	e.GET("/clubs/:id", clubHandler.FindByID())
+	club := v1.Group("/clubs")
+	club.GET("", clubHandler.FindAll())
+	club.GET("/:id", clubHandler.FindByID())
 }
