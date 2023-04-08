@@ -21,8 +21,8 @@ import (
 )
 
 type User struct {
-	ID        int    `gorm:"primary_key"`
-	UID       string `gorm:"unique"`
+	ID        int `gorm:"primary_key"`
+	UID       int `gorm:"unique"`
 	Name      string
 	Class     string
 	Icon      string

@@ -1,11 +1,11 @@
 package handler
 
 import (
+	_ "api/docs"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/swaggo/echo-swagger"
 	"net/http"
-	_ "api/docs"
 
 	"api/config"
 )

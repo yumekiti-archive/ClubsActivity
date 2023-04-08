@@ -1,9 +1,38 @@
+definitions:
+  handler.requestUser:
+    properties:
+      class:
+        example: IE3A
+        type: string
+      icon:
+        example: ""
+        type: string
+      name:
+        example: ぴよ太郎
+        type: string
+      readme:
+        example: ""
+        type: string
+      uid:
+        example: 220000
+        type: integer
+    type: object
 info:
   contact: {}
 paths:
   /v1/me:
     get:
-      description: 自分のユーザー情報を取得する
       responses: {}
       summary: 自分のユーザー情報を取得する
+  /v1/users:
+    post:
+      parameters:
+      - description: ユーザー情報
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/handler.requestUser'
+      responses: {}
+      summary: ユーザーを作成する
 swagger: "2.0"

@@ -22,15 +22,16 @@ func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
 }
 
 type requestUser struct {
-	Name   string `json:"name"`
-	Class  string `json:"class"`
-	Icon   string `json:"icon"`
-	Readme string `json:"readme"`
+	UID    int    `json:"uid" example:"220000"`
+	Name   string `json:"name" example:"ぴよ太郎"`
+	Class  string `json:"class" example:"IE3A"`
+	Icon   string `json:"icon" example:""`
+	Readme string `json:"readme" example:""`
 }
 
 type responseUser struct {
 	ID        int    `json:"id"`
-	UID       string `json:"uid"`
+	UID       int    `json:"uid"`
 	Name      string `json:"name"`
 	Class     string `json:"class"`
 	Icon      string `json:"icon"`
@@ -48,6 +49,9 @@ type responseUserWithClub struct {
 	Clubs []responseClub `json:"clubs"`
 }
 
+// @Summary ユーザーを作成する
+// @Router /v1/users [post]
+// @Param user body requestUser true "ユーザー情報"
 func (h *userHandler) Store() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var req requestUser
@@ -56,6 +60,7 @@ func (h *userHandler) Store() echo.HandlerFunc {
 		}
 
 		user, err := h.userUsecase.Store(&domain.User{
+			UID:   req.UID,
 			Name:  req.Name,
 			Class: req.Class,
 			Icon:  req.Icon,
@@ -79,7 +84,6 @@ func (h *userHandler) Store() echo.HandlerFunc {
 }
 
 // @Summary 自分のユーザー情報を取得する
-// @Description 自分のユーザー情報を取得する
 // @Router /v1/me [get]
 func (h *userHandler) FindMe() echo.HandlerFunc {
 	return func(c echo.Context) error {

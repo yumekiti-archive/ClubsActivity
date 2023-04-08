@@ -58,7 +58,7 @@ func seeder(db *gorm.DB) error {
 
 	users := []domain.User{
 		{
-			UID:    "220001",
+			UID:    220001,
 			Name:   "ほげ太郎",
 			Class:  "IE1A",
 			Icon:   "https://source.unsplash.com/random",
@@ -66,7 +66,7 @@ func seeder(db *gorm.DB) error {
 			Clubs:  []domain.Club{clubs[0]},
 		},
 		{
-			UID:    "220002",
+			UID:    220002,
 			Name:   "ふが太郎",
 			Class:  "IE1A",
 			Icon:   "https://source.unsplash.com/random",

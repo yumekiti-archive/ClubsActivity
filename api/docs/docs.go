@@ -18,9 +18,52 @@ const docTemplate = `{
     "paths": {
         "/v1/me": {
             "get": {
-                "description": "自分のユーザー情報を取得する",
                 "summary": "自分のユーザー情報を取得する",
                 "responses": {}
+            }
+        },
+        "/v1/users": {
+            "post": {
+                "summary": "ユーザーを作成する",
+                "parameters": [
+                    {
+                        "description": "ユーザー情報",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.requestUser"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        }
+    },
+    "definitions": {
+        "handler.requestUser": {
+            "type": "object",
+            "properties": {
+                "class": {
+                    "type": "string",
+                    "example": "IE3A"
+                },
+                "icon": {
+                    "type": "string",
+                    "example": ""
+                },
+                "name": {
+                    "type": "string",
+                    "example": "ぴよ太郎"
+                },
+                "readme": {
+                    "type": "string",
+                    "example": ""
+                },
+                "uid": {
+                    "type": "integer",
+                    "example": 220000
+                }
             }
         }
     }
