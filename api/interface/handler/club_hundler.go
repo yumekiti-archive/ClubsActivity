@@ -24,12 +24,12 @@ func NewClubHandler(cu usecase.ClubUsecase) ClubHandler {
 type requestClub struct{}
 
 type responseClub struct {
-	ID          int    `json:"id"`
-	Name        string `json:"name"`
-	Readme string `json:"readme"`
-	Category    string `json:"category"`
-	CreatedAt   string `json:"created_at"`
-	UpdatedAt   string `json:"updated_at"`
+	ID        int    `json:"id"`
+	Name      string `json:"name"`
+	Readme    string `json:"readme"`
+	Category  string `json:"category"`
+	CreatedAt string `json:"created_at"`
+	UpdatedAt string `json:"updated_at"`
 }
 
 func (h *clubHandler) FindAll() echo.HandlerFunc {
@@ -42,12 +42,12 @@ func (h *clubHandler) FindAll() echo.HandlerFunc {
 		var responseClubs []responseClub
 		for _, club := range clubs {
 			responseClubs = append(responseClubs, responseClub{
-				ID:          club.ID,
-				Name:        club.Name,
-				Readme: club.Readme,
-				Category:    club.Category,
-				CreatedAt:   club.CreatedAt.Format("2006-01-02 15:04:05"),
-				UpdatedAt:   club.UpdatedAt.Format("2006-01-02 15:04:05"),
+				ID:        club.ID,
+				Name:      club.Name,
+				Readme:    club.Readme,
+				Category:  club.Category,
+				CreatedAt: club.CreatedAt.Format("2006-01-02 15:04:05"),
+				UpdatedAt: club.UpdatedAt.Format("2006-01-02 15:04:05"),
 			})
 		}
 
@@ -68,12 +68,12 @@ func (h *clubHandler) FindByID() echo.HandlerFunc {
 		}
 
 		return c.JSON(http.StatusOK, responseClub{
-			ID:          club.ID,
-			Name:        club.Name,
-			Readme: club.Readme,
-			Category:    club.Category,
-			CreatedAt:   club.CreatedAt.Format("2006-01-02 15:04:05"),
-			UpdatedAt:   club.UpdatedAt.Format("2006-01-02 15:04:05"),
+			ID:        club.ID,
+			Name:      club.Name,
+			Readme:    club.Readme,
+			Category:  club.Category,
+			CreatedAt: club.CreatedAt.Format("2006-01-02 15:04:05"),
+			UpdatedAt: club.UpdatedAt.Format("2006-01-02 15:04:05"),
 		})
 	}
 }

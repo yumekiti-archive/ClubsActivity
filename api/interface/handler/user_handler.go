@@ -88,12 +88,12 @@ func (h *userHandler) FindMe() echo.HandlerFunc {
 		var responseClubs []responseClub
 		for _, club := range user.Clubs {
 			responseClubs = append(responseClubs, responseClub{
-				ID:          club.ID,
-				Name:        club.Name,
-				Readme: club.Readme,
-				Category:    club.Category,
-				CreatedAt:   club.CreatedAt.Format("2006-01-02 15:04:05"),
-				UpdatedAt:   club.UpdatedAt.Format("2006-01-02 15:04:05"),
+				ID:        club.ID,
+				Name:      club.Name,
+				Readme:    club.Readme,
+				Category:  club.Category,
+				CreatedAt: club.CreatedAt.Format("2006-01-02 15:04:05"),
+				UpdatedAt: club.UpdatedAt.Format("2006-01-02 15:04:05"),
 			})
 		}
 

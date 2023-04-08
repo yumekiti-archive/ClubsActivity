@@ -19,39 +19,39 @@ func NewClubRepository(conn *gorm.DB) repository.ClubRepository {
 func (cr *clubRepository) FindAll() ([]domain.Club, error) {
 	return []domain.Club{
 		{
-			ID:          1,
-			Name:        "test",
-			Readme: "test",
-			Category:    "test",
-			CreatedAt:   time.Now(),
-			UpdatedAt:   time.Now(),
+			ID:        1,
+			Name:      "test",
+			Readme:    "test",
+			Category:  "test",
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
 		},
 		{
-			ID:          2,
-			Name:        "test",
-			Readme: "test",
-			Category:    "test",
-			CreatedAt:   time.Now(),
-			UpdatedAt:   time.Now(),
+			ID:        2,
+			Name:      "test",
+			Readme:    "test",
+			Category:  "test",
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
 		},
 		{
-			ID:          3,
-			Name:        "test",
-			Readme: "test",
-			Category:    "test",
-			CreatedAt:   time.Now(),
-			UpdatedAt:   time.Now(),
+			ID:        3,
+			Name:      "test",
+			Readme:    "test",
+			Category:  "test",
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
 		},
 	}, nil
 }
 
 func (cr *clubRepository) FindByID(id int) (domain.Club, error) {
 	return domain.Club{
-		ID:          1,
-		Name:        "test",
-		Readme: "test",
-		Category:    "test",
-		CreatedAt:   time.Now(),
-		UpdatedAt:   time.Now(),
+		ID:        1,
+		Name:      "test",
+		Readme:    "test",
+		Category:  "test",
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
 	}, nil
 }

@@ -20,7 +20,7 @@ func NewDB() *gorm.DB {
 	); err != nil {
 		panic("failed to drop table")
 	}
-	
+
 	if err := db.AutoMigrate(&domain.Club{}); err != nil {
 		panic("failed to migrate club")
 	}
@@ -28,7 +28,7 @@ func NewDB() *gorm.DB {
 	if err := db.AutoMigrate(&domain.User{}); err != nil {
 		panic("failed to migrate user")
 	}
-	
+
 	if err := seeder(db); err != nil {
 		panic("failed to seed")
 	}
@@ -39,14 +39,14 @@ func NewDB() *gorm.DB {
 func seeder(db *gorm.DB) error {
 	clubs := []domain.Club{
 		{
-			Name:        "サークルA",
-			Readme: "サークルAの説明\nこれはサークルAの説明です。",
-			Category:    "IT",
+			Name:     "サークルA",
+			Readme:   "サークルAの説明\nこれはサークルAの説明です。",
+			Category: "IT",
 		},
 		{
-			Name:        "サークルB",
-			Readme: "サークルBの説明",
-			Category:    "Game",
+			Name:     "サークルB",
+			Readme:   "サークルBの説明",
+			Category: "Game",
 		},
 	}
 
@@ -56,22 +56,22 @@ func seeder(db *gorm.DB) error {
 		}
 	}
 
-  users := []domain.User{
+	users := []domain.User{
 		{
-			UID:  "220001",
-			Name:  "ほげ太郎",
-			Class: "IE1A",
-			Icon:  "https://source.unsplash.com/random",
+			UID:    "220001",
+			Name:   "ほげ太郎",
+			Class:  "IE1A",
+			Icon:   "https://source.unsplash.com/random",
 			Readme: "こんにちは！\nよろしくお願いします！",
-			Clubs: []domain.Club{clubs[0]},
+			Clubs:  []domain.Club{clubs[0]},
 		},
 		{
-			UID:  "220002",
-			Name:  "ふが太郎",
-			Class: "IE1A",
-			Icon:  "https://source.unsplash.com/random",
+			UID:    "220002",
+			Name:   "ふが太郎",
+			Class:  "IE1A",
+			Icon:   "https://source.unsplash.com/random",
 			Readme: "こんにちは！\nよろしくお願いします！",
-			Clubs:	nil,
+			Clubs:  nil,
 		},
 	}
 
