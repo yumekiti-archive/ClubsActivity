@@ -15,9 +15,9 @@ func NewUserRepository(conn *gorm.DB) repository.UserRepository {
 	return &userRepository{Conn: conn}
 }
 
-func (ur *userRepository) FindMe(id int) (*domain.User, error) {
+func (ur *userRepository) FindMe(uid int) (*domain.User, error) {
 	user := &domain.User{}
-	if err := ur.Conn.First(user, id).Error; err != nil {
+	if err := ur.Conn.Where("uid = ?", uid).Preload("Clubs").First(&user).Error; err != nil {
 		return user, err
 	}
 	return user, nil

@@ -45,7 +45,7 @@ type responseUserWithReadme struct {
 
 type responseUserWithClub struct {
 	responseUser
-	Clubs []responseClub `json:"affiliated_clubs"`
+	Clubs []responseClub `json:"clubs"`
 }
 
 func (h *userHandler) Store() echo.HandlerFunc {
@@ -80,7 +80,7 @@ func (h *userHandler) Store() echo.HandlerFunc {
 
 func (h *userHandler) FindMe() echo.HandlerFunc {
 	return func(c echo.Context) error {
-		user, err := h.userUsecase.FindMe(1)
+		user, err := h.userUsecase.FindMe(220001)
 		if err != nil {
 			return c.JSON(http.StatusInternalServerError, err)
 		}

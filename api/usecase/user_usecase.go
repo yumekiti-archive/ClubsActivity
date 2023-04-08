@@ -6,7 +6,7 @@ import (
 )
 
 type UserUsecase interface {
-	FindMe(id int) (*domain.User, error)
+	FindMe(uid int) (*domain.User, error)
 	Store(user *domain.User) (*domain.User, error)
 	FindByClubID(id int) ([]*domain.User, error)
 }
@@ -21,8 +21,8 @@ func NewUserUsecase(ur repository.UserRepository) UserUsecase {
 	}
 }
 
-func (uu *userUsecase) FindMe(id int) (*domain.User, error) {
-	user, err := uu.userRepository.FindMe(id)
+func (uu *userUsecase) FindMe(uid int) (*domain.User, error) {
+	user, err := uu.userRepository.FindMe(uid)
 	if err != nil {
 		return user, err
 	}
