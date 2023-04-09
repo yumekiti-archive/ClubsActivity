@@ -19,11 +19,11 @@ import (
 )
 
 type Activity struct {
-	ActivityID     int
-	ActivityPlace  string
-	ActivityDetail string
-	ActivityUserID []int
-	ActivityClubID int
-	CreatedAt      time.Time
-	UpdatedAt      time.Time
+	ID        int `gorm:"primaryKey"`
+	Place     string
+	Detail    string
+	Users     []User    `gorm:"many2many:activity_users;"`
+	Club      Club      `gorm:"foreignKey:ID"`
+	CreatedAt time.Time `gorm:"autoCreateTime"`
+	UpdatedAt time.Time `gorm:"autoUpdateTime"`
 }

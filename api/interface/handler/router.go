@@ -15,6 +15,7 @@ func InitRouting(
 	e *echo.Echo,
 	userHandler UserHandler,
 	clubHandler ClubHandler,
+	activityHandler ActivityHandler,
 ) {
 	// 以下のルーティングはJWT認証が必要
 	r := e.Group("")
@@ -33,6 +34,7 @@ func InitRouting(
 	club := v1.Group("/clubs")
 	club.GET("", clubHandler.FindAll())
 	club.GET("/:id", clubHandler.FindByID())
+	club.GET("/:id/activities", activityHandler.FindByClubID())
 
 	// swagger
 	e.GET("/swagger/*", echoSwagger.WrapHandler)

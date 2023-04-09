@@ -25,6 +25,21 @@
                 "responses": {}
             }
         },
+        "/v1/clubs/{id}/activities": {
+            "get": {
+                "summary": "クラブの活動を取得",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Club ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/v1/me": {
             "get": {
                 "summary": "自分のユーザー情報を取得する",

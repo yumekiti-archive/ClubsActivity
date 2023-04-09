@@ -21,12 +21,15 @@ func main() {
 	// repository
 	userRepository := infrastructure.NewUserRepository(db)
 	clubRepository := infrastructure.NewClubRepository(db)
+	activityRepository := infrastructure.NewActivityRepository(db)
 	// usecase
 	userUsecase := usecase.NewUserUsecase(userRepository)
 	clubUsecase := usecase.NewClubUsecase(clubRepository)
+	activityUsecase := usecase.NewActivityUsecase(activityRepository)
 	// handler
 	userHandler := handler.NewUserHandler(userUsecase)
 	clubHandler := handler.NewClubHandler(clubUsecase)
+	activityHandler := handler.NewActivityHandler(activityUsecase)
 
 	// Echo instance
 	e := echo.New()
@@ -45,6 +48,7 @@ func main() {
 		e,
 		userHandler,
 		clubHandler,
+		activityHandler,
 	)
 
 	// Start server

@@ -34,6 +34,16 @@ paths:
         type: integer
       responses: {}
       summary: クラブを取得
+  /v1/clubs/{id}/activities:
+    get:
+      parameters:
+      - description: Club ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      summary: クラブの活動を取得
   /v1/me:
     get:
       responses: {}

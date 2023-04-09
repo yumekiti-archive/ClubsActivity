@@ -17,6 +17,7 @@ func NewDB() *gorm.DB {
 	if err := db.Migrator().DropTable(
 		&domain.Club{},
 		&domain.User{},
+		&domain.Activity{},
 	); err != nil {
 		panic("failed to drop table")
 	}
@@ -27,6 +28,10 @@ func NewDB() *gorm.DB {
 
 	if err := db.AutoMigrate(&domain.User{}); err != nil {
 		panic("failed to migrate user")
+	}
+
+	if err := db.AutoMigrate(&domain.Activity{}); err != nil {
+		panic("failed to migrate activity")
 	}
 
 	if err := seeder(db); err != nil {
@@ -91,6 +96,45 @@ func seeder(db *gorm.DB) error {
 				return err
 			}
 		}
+	}
+
+	activities := []domain.Activity{
+		{
+			Place:  "サークルAの活動場所",
+			Detail: "サークルAの活動詳細\nこれはサークルAの活動詳細です。",
+		},
+		{
+			Place:  "サークルAの活動場所",
+			Detail: "サークルA2の活動詳細\nこれはサークルAの活動詳細です。",
+		},
+	}
+
+	for _, activity := range activities {
+		if err := db.Create(&activity).Error; err != nil {
+			return err
+		}
+
+		// activity 1 はサークルAに所属かつuser 1 に所属
+		if activity.ID == 1 {
+			club := domain.Club{}
+			if err := db.First(&club, 1).Error; err != nil {
+				return err
+			}
+
+			if err := db.Model(&activity).Association("Club").Append(&club); err != nil {
+				return err
+			}
+
+			user := domain.User{}
+			if err := db.First(&user, 1).Error; err != nil {
+				return err
+			}
+
+			if err := db.Model(&activity).Association("Users").Append(&user); err != nil {
+				return err
+			}
+		}
+
 	}
 
 	return nil
