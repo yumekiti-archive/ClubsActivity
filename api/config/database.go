@@ -63,7 +63,7 @@ func seeder(db *gorm.DB) error {
 			Class:  "IE1A",
 			Icon:   "https://source.unsplash.com/random",
 			Readme: "こんにちは！\nよろしくお願いします！",
-			Clubs:  []domain.Club{clubs[0]},
+			Clubs:  nil,
 		},
 		{
 			UID:    220002,
@@ -78,6 +78,18 @@ func seeder(db *gorm.DB) error {
 	for _, user := range users {
 		if err := db.Create(&user).Error; err != nil {
 			return err
+		}
+
+		// user 1 はサークルAに所属
+		if user.ID == 1 {
+			club := domain.Club{}
+			if err := db.First(&club, 1).Error; err != nil {
+				return err
+			}
+
+			if err := db.Model(&user).Association("Clubs").Append(&club); err != nil {
+				return err
+			}
 		}
 	}
 
