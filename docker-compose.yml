@@ -57,3 +57,22 @@ services:
     command: mock -h 0.0.0.0 /mock/openapi.yml
     volumes:
       - ./mock:/mock
+
+  sqlitebrowser:
+    image: lscr.io/linuxserver/sqlitebrowser:latest
+    container_name: "sqlitebrowser"
+    ports:
+      - "3004:3000"
+    volumes:
+      - ./api/data.db:/config/data.db
+      - ./config:/config
+    environment: 
+      - TZ=Asia/Tokyo
+      - PUID=1000
+      - PGID=1000
+
+  # adminer:
+  #   image: adminer
+  #   container_name: "adminer"
+  #   ports:
+  #     - "3004:8080"
