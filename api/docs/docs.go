@@ -25,6 +25,15 @@ const docTemplate = `{
         "/v1/clubs/{id}": {
             "get": {
                 "summary": "クラブを取得",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Club ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {}
             }
         },

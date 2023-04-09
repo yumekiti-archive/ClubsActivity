@@ -59,6 +59,7 @@ func (h *clubHandler) FindAll() echo.HandlerFunc {
 
 // @Summary クラブを取得
 // @Router /v1/clubs/{id} [get]
+// @Param id path int true "Club ID"
 func (h *clubHandler) FindByID() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		id, err := strconv.Atoi(c.Param("id"))
