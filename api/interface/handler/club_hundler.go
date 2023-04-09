@@ -32,6 +32,8 @@ type responseClub struct {
 	UpdatedAt string `json:"updated_at"`
 }
 
+// @Summary クラブ一覧を取得
+// @Router /v1/clubs [get]
 func (h *clubHandler) FindAll() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		clubs, err := h.clubUsecase.FindAll()
@@ -55,6 +57,8 @@ func (h *clubHandler) FindAll() echo.HandlerFunc {
 	}
 }
 
+// @Summary クラブを取得
+// @Router /v1/clubs/{id} [get]
 func (h *clubHandler) FindByID() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		id, err := strconv.Atoi(c.Param("id"))

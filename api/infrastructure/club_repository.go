@@ -2,7 +2,6 @@ package infrastructure
 
 import (
 	"gorm.io/gorm"
-	"time"
 
 	"api/domain"
 	"api/domain/repository"
@@ -17,41 +16,19 @@ func NewClubRepository(conn *gorm.DB) repository.ClubRepository {
 }
 
 func (cr *clubRepository) FindAll() ([]domain.Club, error) {
-	return []domain.Club{
-		{
-			ID:        1,
-			Name:      "test",
-			Readme:    "test",
-			Category:  "test",
-			CreatedAt: time.Now(),
-			UpdatedAt: time.Now(),
-		},
-		{
-			ID:        2,
-			Name:      "test",
-			Readme:    "test",
-			Category:  "test",
-			CreatedAt: time.Now(),
-			UpdatedAt: time.Now(),
-		},
-		{
-			ID:        3,
-			Name:      "test",
-			Readme:    "test",
-			Category:  "test",
-			CreatedAt: time.Now(),
-			UpdatedAt: time.Now(),
-		},
-	}, nil
+	var clubs []domain.Club
+	if err := cr.Conn.Find(&clubs).Error; err != nil {
+		return nil, err
+	}
+
+	return clubs, nil
 }
 
 func (cr *clubRepository) FindByID(id int) (domain.Club, error) {
-	return domain.Club{
-		ID:        1,
-		Name:      "test",
-		Readme:    "test",
-		Category:  "test",
-		CreatedAt: time.Now(),
-		UpdatedAt: time.Now(),
-	}, nil
+	var club domain.Club
+	if err := cr.Conn.First(&club, id).Error; err != nil {
+		return domain.Club{}, err
+	}
+
+	return club, nil
 }

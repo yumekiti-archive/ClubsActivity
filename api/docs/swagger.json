@@ -4,6 +4,18 @@
         "contact": {}
     },
     "paths": {
+        "/v1/clubs": {
+            "get": {
+                "summary": "クラブ一覧を取得",
+                "responses": {}
+            }
+        },
+        "/v1/clubs/{id}": {
+            "get": {
+                "summary": "クラブを取得",
+                "responses": {}
+            }
+        },
         "/v1/me": {
             "get": {
                 "summary": "自分のユーザー情報を取得する",
