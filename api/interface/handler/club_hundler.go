@@ -26,10 +26,14 @@ type requestClub struct{}
 type responseClub struct {
 	ID        int    `json:"id"`
 	Name      string `json:"name"`
-	Readme    string `json:"readme"`
 	Category  string `json:"category"`
 	CreatedAt string `json:"created_at"`
 	UpdatedAt string `json:"updated_at"`
+}
+
+responseClubWithReadme struct {
+	responseClub
+	Readme string `json:"readme"`
 }
 
 // @Summary クラブ一覧を取得
@@ -46,7 +50,6 @@ func (h *clubHandler) FindAll() echo.HandlerFunc {
 			responseClubs = append(responseClubs, responseClub{
 				ID:        club.ID,
 				Name:      club.Name,
-				Readme:    club.Readme,
 				Category:  club.Category,
 				CreatedAt: club.CreatedAt.Format("2006-01-02 15:04:05"),
 				UpdatedAt: club.UpdatedAt.Format("2006-01-02 15:04:05"),
@@ -72,7 +75,7 @@ func (h *clubHandler) FindByID() echo.HandlerFunc {
 			return c.JSON(http.StatusInternalServerError, err)
 		}
 
-		return c.JSON(http.StatusOK, responseClub{
+		return c.JSON(http.StatusOK, responseClubWithReadme{
 			ID:        club.ID,
 			Name:      club.Name,
 			Readme:    club.Readme,
