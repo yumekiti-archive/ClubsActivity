@@ -31,4 +31,7 @@ format:
 fmt:
 	$(dc) exec api go fmt ./...
 
+swagger:
+	$(dc) exec api swag init
+
 .PHONY:	up down restart reup rm logs web api format fmt
