@@ -31,7 +31,7 @@ type responseClub struct {
 	UpdatedAt string `json:"updated_at"`
 }
 
-responseClubWithReadme struct {
+type responseClubWithReadme struct {
 	responseClub
 	Readme string `json:"readme"`
 }
@@ -76,12 +76,14 @@ func (h *clubHandler) FindByID() echo.HandlerFunc {
 		}
 
 		return c.JSON(http.StatusOK, responseClubWithReadme{
-			ID:        club.ID,
-			Name:      club.Name,
+			responseClub: responseClub{
+				ID:        club.ID,
+				Name:      club.Name,
+				Category:  club.Category,
+				CreatedAt: club.CreatedAt.Format("2006-01-02 15:04:05"),
+				UpdatedAt: club.UpdatedAt.Format("2006-01-02 15:04:05"),
+			},
 			Readme:    club.Readme,
-			Category:  club.Category,
-			CreatedAt: club.CreatedAt.Format("2006-01-02 15:04:05"),
-			UpdatedAt: club.UpdatedAt.Format("2006-01-02 15:04:05"),
 		})
 	}
 }
