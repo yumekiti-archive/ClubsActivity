@@ -65,7 +65,6 @@ services:
     ports:
       - "3004:3000"
     volumes:
-      - ./api/data.db:/config/data.db
       - ./config:/config
     environment: 
       - TZ=Asia/Tokyo
