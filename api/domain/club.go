@@ -20,10 +20,7 @@ import (
 
 type Club struct {
 	gorm.Model
-	ID        int `gorm:"primary_key"`
 	Name      string
 	Readme    string
 	Category  string
-	CreatedAt time.Time `gorm:"autoCreateTime"`
-	UpdatedAt time.Time `gorm:"autoUpdateTime"`
 }

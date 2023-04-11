@@ -23,15 +23,12 @@ import (
 
 type User struct {
 	gorm.Model
-	ID        int `gorm:"primary_key"`
 	UID       int `gorm:"unique"`
 	Name      string
 	Class     string
 	Icon      string
 	Readme    string
 	Clubs     []Club    `gorm:"many2many:user_clubs;"`
-	CreatedAt time.Time `gorm:"autoCreateTime"`
-	UpdatedAt time.Time `gorm:"autoUpdateTime"`
 }
 
 type UserClub struct {
