@@ -32,7 +32,11 @@ func (ur *userRepository) Store(user *domain.User) (*domain.User, error) {
 
 func (ur *userRepository) FindByClubID(id int) ([]*domain.User, error) {
 	users := []*domain.User{}
-	if err := ur.Conn.Where("club_id = ?", id).Find(&users).Error; err != nil {
+	if err := ur.Conn.
+		Joins("JOIN user_clubs ON users.id = user_clubs.user_id").
+		Where("user_clubs.club_id = ?", id).
+		Find(&users).
+		Error; err != nil {
 		return users, err
 	}
 	return users, nil
