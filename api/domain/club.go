@@ -14,8 +14,8 @@
 package domain
 
 import (
-	"time"
 	"gorm.io/gorm"
+	"time"
 )
 
 type Club struct {
