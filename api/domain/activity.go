@@ -22,8 +22,9 @@ type Activity struct {
 	ID        int `gorm:"primaryKey"`
 	Place     string
 	Detail    string
-	Users     []User    `gorm:"many2many:activity_users;"`
-	Club      Club      `gorm:"foreignKey:ID"`
+	Users     []User `gorm:"many2many:activity_users;"`
+	ClubID    int
 	CreatedAt time.Time `gorm:"autoCreateTime"`
 	UpdatedAt time.Time `gorm:"autoUpdateTime"`
+	Club      Club      `gorm:"foreignKey:ClubID"`
 }

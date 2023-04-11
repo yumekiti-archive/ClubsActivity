@@ -3,6 +3,7 @@ package handler
 import (
 	"github.com/labstack/echo/v4"
 	"net/http"
+	"strconv"
 
 	"api/domain"
 	"api/usecase"
@@ -11,6 +12,7 @@ import (
 type UserHandler interface {
 	FindMe() echo.HandlerFunc
 	Store() echo.HandlerFunc
+	FindByClubID() echo.HandlerFunc
 }
 
 type userHandler struct {
@@ -117,5 +119,37 @@ func (h *userHandler) FindMe() echo.HandlerFunc {
 		}
 
 		return c.JSON(http.StatusOK, response)
+	}
+}
+
+// @Summary クラブに所属しているユーザーを取得する
+// @Router /v1/clubs/{id}/users [get]
+// @Param id path int true "クラブID"
+func (h *userHandler) FindByClubID() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		id, err := strconv.Atoi(c.Param("id"))
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err)
+		}
+
+		users, err := h.userUsecase.FindByClubID(id)
+		if err != nil {
+			return c.JSON(http.StatusInternalServerError, err)
+		}
+
+		var responseUsers []responseUser
+		for _, user := range users {
+			responseUsers = append(responseUsers, responseUser{
+				ID:        user.ID,
+				UID:       user.UID,
+				Name:      user.Name,
+				Class:     user.Class,
+				Icon:      user.Icon,
+				CreatedAt: user.CreatedAt.Format("2006-01-02 15:04:05"),
+				UpdatedAt: user.UpdatedAt.Format("2006-01-02 15:04:05"),
+			})
+		}
+
+		return c.JSON(http.StatusOK, responseUsers)
 	}
 }

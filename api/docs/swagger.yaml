@@ -44,6 +44,16 @@ paths:
         type: integer
       responses: {}
       summary: クラブの活動を取得
+  /v1/clubs/{id}/users:
+    get:
+      parameters:
+      - description: クラブID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      summary: クラブに所属しているユーザーを取得する
   /v1/me:
     get:
       responses: {}

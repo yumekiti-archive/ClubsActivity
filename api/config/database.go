@@ -114,14 +114,13 @@ func seeder(db *gorm.DB) error {
 			return err
 		}
 
-		// activity 1 はサークルAに所属かつuser 1 に所属
 		if activity.ID == 1 {
 			club := domain.Club{}
 			if err := db.First(&club, 1).Error; err != nil {
 				return err
 			}
 
-			if err := db.Model(&activity).Association("Club").Append(&club); err != nil {
+			if err := db.Model(&activity).Update("club_id", club.ID).Error; err != nil {
 				return err
 			}
 
@@ -134,7 +133,6 @@ func seeder(db *gorm.DB) error {
 				return err
 			}
 		}
-
 	}
 
 	return nil

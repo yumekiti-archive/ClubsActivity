@@ -83,7 +83,7 @@ func (h *clubHandler) FindByID() echo.HandlerFunc {
 				CreatedAt: club.CreatedAt.Format("2006-01-02 15:04:05"),
 				UpdatedAt: club.UpdatedAt.Format("2006-01-02 15:04:05"),
 			},
-			Readme:    club.Readme,
+			Readme: club.Readme,
 		})
 	}
 }

@@ -52,6 +52,21 @@ const docTemplate = `{
                 "responses": {}
             }
         },
+        "/v1/clubs/{id}/users": {
+            "get": {
+                "summary": "クラブに所属しているユーザーを取得する",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "クラブID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/v1/me": {
             "get": {
                 "summary": "自分のユーザー情報を取得する",

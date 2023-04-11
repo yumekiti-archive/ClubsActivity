@@ -31,3 +31,8 @@ type User struct {
 	CreatedAt time.Time `gorm:"autoCreateTime"`
 	UpdatedAt time.Time `gorm:"autoUpdateTime"`
 }
+
+type UserClub struct {
+	UserID uint
+	ClubID uint
+}

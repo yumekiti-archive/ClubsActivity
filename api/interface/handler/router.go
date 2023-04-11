@@ -35,6 +35,7 @@ func InitRouting(
 	club.GET("", clubHandler.FindAll())
 	club.GET("/:id", clubHandler.FindByID())
 	club.GET("/:id/activities", activityHandler.FindByClubID())
+	club.GET("/:id/users", userHandler.FindByClubID())
 
 	// swagger
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
