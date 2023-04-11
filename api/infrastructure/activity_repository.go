@@ -16,9 +16,14 @@ func NewActivityRepository(conn *gorm.DB) repository.ActivityRepository {
 }
 
 func (ar *activityRepository) FindByClubID(clubID int) ([]domain.Activity, error) {
-	var activities []domain.Activity
-	if err := ar.Conn.Preload("Users").Preload("Club").Where("club_id = ?", clubID).Find(&activities).Error; err != nil {
-		return nil, err
+	activities := []domain.Activity{}
+	if err := ar.Conn.
+		Joins("JOIN clubs ON activities.club_id = clubs.id").
+		Where("clubs.id = ?", clubID).
+		Preload("Users").
+		Find(&activities).
+		Error; err != nil {
+		return activities, err
 	}
 	return activities, nil
 }

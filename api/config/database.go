@@ -17,7 +17,9 @@ func NewDB() *gorm.DB {
 	if err := db.Migrator().DropTable(
 		&domain.Club{},
 		&domain.User{},
+		&domain.UserClub{},
 		&domain.Activity{},
+		&domain.ActivityUser{},
 	); err != nil {
 		panic("failed to drop table")
 	}
