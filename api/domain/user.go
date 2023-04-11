@@ -18,9 +18,11 @@ package domain
 
 import (
 	"time"
+	"gorm.io/gorm"
 )
 
 type User struct {
+	gorm.Model
 	ID        int `gorm:"primary_key"`
 	UID       int `gorm:"unique"`
 	Name      string
@@ -33,6 +35,7 @@ type User struct {
 }
 
 type UserClub struct {
+	gorm.Model
 	UserID uint
 	ClubID uint
 }

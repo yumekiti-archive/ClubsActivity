@@ -15,9 +15,11 @@ package domain
 
 import (
 	"time"
+	"gorm.io/gorm"
 )
 
 type Club struct {
+	gorm.Model
 	ID        int `gorm:"primary_key"`
 	Name      string
 	Readme    string

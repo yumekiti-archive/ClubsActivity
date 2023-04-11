@@ -16,9 +16,11 @@ package domain
 
 import (
 	"time"
+	"gorm.io/gorm"
 )
 
 type Activity struct {
+	gorm.Model
 	ID        int `gorm:"primaryKey"`
 	Place     string
 	Detail    string
