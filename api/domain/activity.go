@@ -16,7 +16,6 @@ package domain
 
 import (
 	"gorm.io/gorm"
-	"time"
 )
 
 type Activity struct {
