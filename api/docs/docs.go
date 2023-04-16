@@ -74,6 +74,21 @@ const docTemplate = `{
             }
         },
         "/v1/users": {
+            "put": {
+                "summary": "ユーザーを更新する",
+                "parameters": [
+                    {
+                        "description": "ユーザー情報",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.requestUser"
+                        }
+                    }
+                ],
+                "responses": {}
+            },
             "post": {
                 "summary": "ユーザーを作成する",
                 "parameters": [

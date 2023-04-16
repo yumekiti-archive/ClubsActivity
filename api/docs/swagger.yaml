@@ -69,4 +69,14 @@ paths:
           $ref: '#/definitions/handler.requestUser'
       responses: {}
       summary: ユーザーを作成する
+    put:
+      parameters:
+      - description: ユーザー情報
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/handler.requestUser'
+      responses: {}
+      summary: ユーザーを更新する
 swagger: "2.0"

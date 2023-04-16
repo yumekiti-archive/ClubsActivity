@@ -41,3 +41,10 @@ func (ur *userRepository) FindByClubID(id int) ([]*domain.User, error) {
 	}
 	return users, nil
 }
+
+func (ur *userRepository) Update(user *domain.User) (*domain.User, error) {
+	if err := ur.Conn.Where("uid = ?", user.UID).Updates(user).Error; err != nil {
+		return user, err
+	}
+	return user, nil
+}

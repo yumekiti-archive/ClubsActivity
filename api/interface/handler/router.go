@@ -29,6 +29,7 @@ func InitRouting(
 
 	users := v1.Group("/users")
 	users.POST("", userHandler.Store())
+	users.PUT("", userHandler.Update())
 
 	// club関連
 	club := v1.Group("/clubs")

@@ -13,6 +13,7 @@ type UserHandler interface {
 	FindMe() echo.HandlerFunc
 	Store() echo.HandlerFunc
 	FindByClubID() echo.HandlerFunc
+	Update() echo.HandlerFunc
 }
 
 type userHandler struct {
@@ -151,5 +152,43 @@ func (h *userHandler) FindByClubID() echo.HandlerFunc {
 		}
 
 		return c.JSON(http.StatusOK, responseUsers)
+	}
+}
+
+// @Summary ユーザーを更新する
+// @Router /v1/users [put]
+// @Param user body requestUser true "ユーザー情報"
+func (h *userHandler) Update() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		var req requestUser
+		if err := c.Bind(&req); err != nil {
+			return c.JSON(http.StatusBadRequest, err)
+		}
+
+		user, err := h.userUsecase.Update(&domain.User{
+			UID:    req.UID,
+			Name:   req.Name,
+			Class:  req.Class,
+			Icon:   req.Icon,
+			Readme: req.Readme,
+		})
+		if err != nil {
+			return c.JSON(http.StatusInternalServerError, err)
+		}
+
+		response := responseUserWithReadme{
+			responseUser: responseUser{
+				ID:        user.ID,
+				UID:       user.UID,
+				Name:      user.Name,
+				Class:     user.Class,
+				Icon:      user.Icon,
+				CreatedAt: user.CreatedAt.Format("2006-01-02 15:04:05"),
+				UpdatedAt: user.UpdatedAt.Format("2006-01-02 15:04:05"),
+			},
+			Readme: user.Readme,
+		}
+
+		return c.JSON(http.StatusOK, response)
 	}
 }
