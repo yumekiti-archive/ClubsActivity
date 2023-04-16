@@ -21,7 +21,7 @@ func NewActivityHandler(au usecase.ActivityUsecase) ActivityHandler {
 }
 
 type responseActivity struct {
-	ID        int            `json:"id"`
+	ID        uint           `json:"id"`
 	Place     string         `json:"place"`
 	Detail    string         `json:"detail"`
 	Users     []responseUser `json:"users"`

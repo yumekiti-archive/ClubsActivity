@@ -32,7 +32,7 @@ type requestUser struct {
 }
 
 type responseUser struct {
-	ID        int    `json:"id"`
+	ID        uint   `json:"id"`
 	UID       int    `json:"uid"`
 	Name      string `json:"name"`
 	Class     string `json:"class"`

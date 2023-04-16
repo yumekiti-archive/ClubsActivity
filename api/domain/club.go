@@ -19,7 +19,7 @@ import (
 
 type Club struct {
 	gorm.Model
-	Name      string
-	Readme    string
-	Category  string
+	Name     string
+	Readme   string
+	Category string
 }

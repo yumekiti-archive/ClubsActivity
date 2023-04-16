@@ -24,7 +24,7 @@ func NewClubHandler(cu usecase.ClubUsecase) ClubHandler {
 type requestClub struct{}
 
 type responseClub struct {
-	ID        int    `json:"id"`
+	ID        uint   `json:"id"`
 	Name      string `json:"name"`
 	Category  string `json:"category"`
 	CreatedAt string `json:"created_at"`

@@ -20,11 +20,11 @@ import (
 
 type Activity struct {
 	gorm.Model
-	Place     string
-	Detail    string
-	Users     []User `gorm:"many2many:activity_users;"`
-	ClubID    int
-	Club      Club      `gorm:"foreignKey:ClubID"`
+	Place  string
+	Detail string
+	Users  []User `gorm:"many2many:activity_users;"`
+	ClubID uint
+	Club   Club `gorm:"foreignKey:ClubID"`
 }
 
 type ActivityUser struct {

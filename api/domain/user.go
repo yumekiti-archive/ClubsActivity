@@ -22,12 +22,12 @@ import (
 
 type User struct {
 	gorm.Model
-	UID       int `gorm:"unique"`
-	Name      string
-	Class     string
-	Icon      string
-	Readme    string
-	Clubs     []Club    `gorm:"many2many:user_clubs;"`
+	UID    int `gorm:"unique"`
+	Name   string
+	Class  string
+	Icon   string
+	Readme string
+	Clubs  []Club `gorm:"many2many:user_clubs;"`
 }
 
 type UserClub struct {
